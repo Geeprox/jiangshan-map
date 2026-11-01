@@ -1,7 +1,7 @@
 import{GlobeCanvas}from'./globe-canvas.mjs?v=20261101-4';
 import{flightZoom,globePointVisible}from'./camera.mjs?v=20261101-4';
 import {referenceName,fuzzyMatch} from './names.mjs?v=20261101-4';
-import {WorldTimeline} from './timeline.mjs?v=20261101-4';
+import {WorldTimeline} from './timeline.mjs?v=20261101-5';
 import {MIN_YEAR,MAX_YEAR,CHINA_MIN_YEAR,normalizeYear,formatYear,shardStart,activeRecords,selectChinaSnapshot,protectedPoint} from './core.mjs?v=20261101-4';
 const $=id=>document.getElementById(id),D=window.d3,W=1600;let H=880;
 const palette=['#a77655','#6f8b78','#9b8067','#a18c55','#7c859a','#b07970','#7f9260','#8e7799','#ad915f','#728d91','#b0937a','#81817a'];
