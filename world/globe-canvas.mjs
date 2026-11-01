@@ -14,4 +14,4 @@ export class GlobeCanvas{
   this.canvas.hidden=false;document.getElementById('world-camera').style.opacity='0';
  }
 }
-import{globePointVisible}from'./camera.mjs?v=20261101-2';
+import{globePointVisible}from'./camera.mjs?v=20261101-3';

@@ -17,4 +17,4 @@ export function bindTimelineGestures({dock,rail,getRange,setRange,seek,stop,onAc
  dock.addEventListener('gesturechange',e=>{if(!safari||points.size>=2)return;e.preventDefault();schedule(zoomTimelineRange(safari.range,e.scale,safari.anchor));},{passive:false});
  dock.addEventListener('gestureend',e=>{if(!safari)return;e.preventDefault();safari=null;onActive(false);},{passive:false});
 }
-import{zoomTimelineRange,panTimelineRange}from'./core.mjs?v=20261101-2';
+import{zoomTimelineRange,panTimelineRange}from'./core.mjs?v=20261101-3';

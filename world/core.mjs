@@ -30,7 +30,8 @@ export function inViewport(point,bounds){return !!point&&(bounds[0][0]<=bounds[1
 export function chooseTimelineCountries(countries,{year,bounds,mode='auto',selectedId=null,limit=6}){
  const active=countries.map(c=>({country:c,state:currentState(c,year)})).filter(x=>mode==='history'||x.state);
  const inside=active.filter(x=>inViewport(x.state?.point||x.country.point,bounds));
- const ranked=(mode==='all'||mode==='history'?active:inside).sort((a,b)=>(b.state?.area||b.country.maxArea)-(a.state?.area||a.country.maxArea));
+ const viewportFallback=mode==='auto'&&!inside.length&&active.length>0;
+ const ranked=(mode==='all'||mode==='history'||viewportFallback?active:inside).sort((a,b)=>(b.state?.area||b.country.maxArea)-(a.state?.area||a.country.maxArea));
  let chosen=[];
  if(mode==='auto'){
   const continents=new Set();for(const x of ranked){if(chosen.length>=limit)break;if(continents.has(x.country.continent))continue;continents.add(x.country.continent);chosen.push(x);}
@@ -38,7 +39,7 @@ export function chooseTimelineCountries(countries,{year,bounds,mode='auto',selec
  }else chosen=ranked.slice(0,mode==='viewport'?50:100);
  const selected=countries.find(c=>c.key===selectedId||c.states.some(s=>s.id===selectedId));
  if(selected&&!chosen.some(x=>x.country===selected))chosen.unshift({country:selected,state:currentState(selected,year)});
- return{rows:chosen.map(x=>x.country),hiddenCount:Math.max(0,active.length-chosen.length),outsideCount:active.length-inside.length,activeCount:active.length};
+ return{rows:chosen.map(x=>x.country),hiddenCount:Math.max(0,active.length-chosen.length),outsideCount:active.length-inside.length,activeCount:active.length,viewportFallback};
 }
 
 /** Manual choices persist separately from their currently visible projection. */

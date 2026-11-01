@@ -70,6 +70,12 @@ track; all tracks share one proportional timescale, one vertical playhead and a
 draggable top handle. The default folds small/out-of-view entities; a bilingual
 fuzzy-search checkbox picker retains manual choices in local browser storage.
 Out-of-view and inactive manual selections fold without clearing those choices.
+The disclosure button explicitly says Expand/Collapse country tracks. If the panel
+was automatically collapsed on mobile, it automatically opens on a desktop
+viewport; explicit user disclosure choices are respected. When automatic viewport
+filtering finds no contemporaries, a visible notice and Outside viewport labels
+retain a small set of contemporary tracks. Clicking a track name flies to that
+polity. Explicit viewport-only and manual filters retain their selected scope.
 Keyboard arrows move one year, Shift+arrows move ten, and Home/End move to range
 ends. Mobile starts with comparison tracks collapsed.
 The local Ma Shan Zheng subset is from Google Fonts under OFL-1.1 (see
