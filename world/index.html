@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>江山时序 · 全球疆域时间轴</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="vendor/fonts/fonts.css"></head>
+<body class="world-page"><div id="world-shell">
+<header class="world-header"><a class="world-brand" href="./"><span class="world-seal">江山时序</span><span class="world-subtitle">全球疆域 · 同年看世界</span></a><nav class="world-nav" aria-label="地图模式"><a id="china-link" href="../?year=741&amp;lang=zh">中国舆图</a><a class="active" href="./" aria-current="page">世界舆图</a><button id="sources-open" type="button">数据说明</button><a id="friday-link" href="/" hidden>← Friday</a></nav></header>
+<main class="world-workspace"><section class="world-map" aria-label="全球历史疆域地图"><svg id="world-svg" viewBox="0 0 1600 880" role="img" aria-label="全球历史疆域；中国部分沿用原项目数据"><defs><mask id="china-cutout" maskUnits="userSpaceOnUse" x="-2000" y="-2000" width="6000" height="5000"><rect x="-2000" y="-2000" width="6000" height="5000" fill="white"/><g id="protected-mask" fill="black"/></mask></defs><g id="world-camera"><path id="world-sphere"/><path id="world-graticule"/><path id="world-land"/><g id="world-polities" mask="url(#china-cutout)"/><g id="china-polities"/><g id="china-maritime"/><g id="world-labels"/></g></svg>
+<div class="map-top"><div class="world-search"><label class="sr-only" for="polity-search">查找当前年份的政权</label><input id="polity-search" type="search" placeholder="寻一方国度 · 罗马 / Rome / 唐" autocomplete="off"><span id="search-count"></span></div><nav class="region-presets" aria-label="地图视野"><button data-region="world" class="chosen">世界</button><button data-region="china">中国</button><button data-region="europe">欧洲</button><button data-region="asia">西亚</button><button data-region="america">美洲</button></nav></div>
+<div id="map-status" class="map-status" role="status">正在展开世界舆图…</div><div id="map-error" class="map-error" hidden><p id="error-text"></p><button id="retry">重新加载</button></div>
+<div class="world-key"><span class="key-heading" id="map-year">公元 741 年</span><p id="china-era"></p><p><i class="ink-dot"></i>疆域为历史重建示意，空白不代表无人居住</p></div><div class="map-actions" aria-label="视图控制"><button id="zoom-in" aria-label="放大地图">＋</button><button id="zoom-out" aria-label="缩小地图">−</button><button id="reset-map">复位视图</button></div>
+</section><aside class="world-sidebar" aria-label="同时代政权"><div class="sidebar-top"><span class="eyebrow">同一时刻，世界各地</span><h1 id="sidebar-year">公元 741 年</h1><p id="world-summary">正在读取疆域记录</p></div><section id="polity-detail" hidden aria-label="政权详情"><button id="detail-close" aria-label="关闭政权详情">×</button><span id="detail-source" class="eyebrow"></span><h2 id="detail-name"></h2><p id="detail-original"></p><p id="detail-span"></p><p id="detail-member"></p><a id="detail-china" hidden>在中国舆图中查看 ↗</a><p id="detail-note"></p></section><div id="polity-list" class="polity-list" aria-label="当前政权列表"></div><p class="sidebar-note" id="coverage-note"></p></aside></main>
+    <footer id="scrubber-dock" aria-label="历史年份时间轴">
+      <div class="playback-controls-group">
+        <button id="act-autoplay" class="round-btn" type="button" title="自动播放 / 暂停（空格）" aria-label="播放" aria-pressed="false">
+          <svg class="ico-svg" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><polygon points="4.5,2.8 13.2,8 4.5,13.2" fill="currentColor"/></svg>
+        </button>
+        <button id="act-play-speed" class="play-speed-btn" type="button" title="播放倍速 1×（点击切换 0.25× / 0.5× / 1× / 2×）" aria-label="播放倍速 1×">
+          <span id="lbl-play-speed">1×</span>
+        </button>
+        <button id="continent-toggle" class="play-speed-btn" type="button" aria-expanded="true">政权对照</button>
+      </div>
+
+      <div id="scrubber-rail-wrap">
+        <div id="scrubber-Bubble" aria-live="polite">
+          <span id="bubble-text">公元 741 年</span>
+        </div>
+        <div id="scrubber-track" role="slider" tabindex="0" aria-valuemin="-3400" aria-valuemax="2024" aria-valuenow="741" aria-label="年份滑块">
+          <div id="dynasty-bands"></div>
+          
+        </div>
+        <div id="scrubber-ticks"></div>
+      </div>
+
+      <div class="track-toolbar"><label>展示 <select id="country-filter"><option value="auto">视野内主要政权</option><option value="viewport">视野内全部政权</option><option value="manual">手动勾选</option><option value="all">全部同时代政权</option><option value="history">全部历史政权</option></select></label><label>时间范围 <select id="time-range"><option value="china">中国分期</option><option value="full">全球全程</option><option value="1000">前后1000年</option><option value="300">前后300年</option></select></label><button id="track-picker-open" type="button">选择轨道⌄</button><button id="country-expand" type="button"></button><div class="year-stepper">
+        <button id="act-step-prev" class="step-nav-btn" type="button" title="上一历史阶段 / 事件节点（←）· Shift+← 退十年" aria-label="上一历史节点">‹</button>
+        <input id="inp-year" type="number" min="-3400" max="2024" step="1" value="741" aria-label="输入年份（负数为公元前）" />
+        <span class="unit-label" id="txt-year-suffix">年</span>
+        <button id="act-step-next" class="step-nav-btn" type="button" title="下一历史阶段 / 事件节点（→）· Shift+→ 进十年" aria-label="下一历史节点">›</button>
+      </div></div>
+      <div id="country-track-panel"><div id="continent-tracks" aria-label="国家与历史政权时间轴"></div></div>
+      <div id="timeline-playhead" aria-hidden="true"></div><button id="timeline-drag-handle" type="button" role="slider" aria-label="拖动时间游标" title="拖动时间游标；方向键逐年，Shift 加速"></button>
+
+<p class="continent-note">各政权独立成行；折叠不代表数据缺失。所有行共用时间刻度，色带宽度按持续年份比例显示。</p>
+</footer>
+</div><dialog id="track-picker" aria-labelledby="track-picker-title"><form method="dialog"><button class="dialog-close" aria-label="关闭轨道选择">×</button></form><span class="eyebrow">国家与历史政权</span><h2 id="track-picker-title">选择对照轨道</h2><label class="sr-only" for="track-picker-search">查找时间轴政权</label><input id="track-picker-search" type="search" placeholder="模糊查找原名或中文参考名" autocomplete="off"><label class="picker-outside"><input id="track-picker-outside" type="checkbox"> 包含视野外及其他年份的政权</label><p id="track-picker-status" role="status"></p><div id="track-picker-list"></div><div class="picker-actions"><button id="track-picker-auto" type="button">恢复自动选择</button><form method="dialog"><button type="submit">完成</button></form></div><p class="picker-note">勾选会保留。视野外或当前年份不存在的政权暂时折叠；移动地图或切换年份后会恢复。</p></dialog><dialog id="sources-dialog"><form method="dialog"><button class="dialog-close" aria-label="关闭数据说明">×</button></form><span class="eyebrow">数据与边界</span><h2>每一层舆图，都有来处</h2><p>全球疆域来自 Seshat Cliopatria（CC BY 4.0），覆盖前3400年至2024年。按来源记录的起止年显示，不在快照之间推算疆界。时间间隔与地区覆盖并不均匀。</p><p>中国部分沿用 DeanChensj/jiangshan-map 的原始数据、历史分期和几何。中国数据未被 Cliopatria 替换或简化；1949年起使用原项目省级轮廓（含台湾省）及南海相关岛屿和线条。海外图层在中国原始图层范围内裁切。前403年以前，中国部分暂缺数据。</p><p>海外几何为全球浏览进行了简化；历史势力、附属关系与实控范围可能重叠，边界均为示意。陆地背景来自 Natural Earth，仅作现代海岸线参照。</p><p><a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener noreferrer">Cliopatria 数据源 ↗</a> · <a href="https://github.com/DeanChensj/jiangshan-map" target="_blank" rel="noopener noreferrer">中国原项目 ↗</a> · <a href="https://github.com/Geeprox/jiangshan-map" target="_blank" rel="noopener noreferrer">本项目源码 ↗</a></p><p class="version-note">中国数据版本 c4afe439 · 全球数据版本 5f433377 · 代码 GPL-3.0</p></dialog>
+<script src="vendor/d3-7.9.0.min.js"></script><script src="../js/china_geo_data.js"></script><script src="../js/map_data.js"></script><script src="../js/atlas_snapshots.js"></script><script type="module" src="app.mjs"></script></body></html>

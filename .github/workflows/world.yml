@@ -1,0 +1,16 @@
+name: World atlas integrity
+on:
+  push:
+    branches: [main, 'codex/global-atlas-v1']
+  pull_request:
+    branches: [main]
+jobs:
+  world:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/world.test.mjs
+      - run: node scripts/validate_atlas.js

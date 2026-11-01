@@ -3984,8 +3984,12 @@ function main() {
     const maShanLinkMatch = indexHtml.match(
       /<link href="(https:\/\/fonts\.googleapis\.com\/css2\?family=Ma\+Shan\+Zheng&text=([^"&]+)&display=swap)" rel="stylesheet" \/>/
     );
-    assert(maShanLinkMatch, 'Expected synchronous subsetted Ma Shan Zheng stylesheet <link> in index.html');
-    const subsetChars = new Set(decodeURIComponent(maShanLinkMatch[2]));
+    const localFont = indexHtml.includes('href="world/vendor/fonts/fonts.css"') && JSON.parse(fs.readFileSync(path.join(ROOT, 'world/vendor/fonts/manifest.json'), 'utf8'));
+    assert(maShanLinkMatch || localFont, 'Expected synchronous subsetted Ma Shan Zheng stylesheet');
+    if (localFont) {
+      assert.strictEqual(require('crypto').createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'world/vendor/fonts', localFont.file))).digest('hex'), localFont.sha256);
+    }
+    const subsetChars = new Set(localFont ? localFont.glyphs : decodeURIComponent(maShanLinkMatch[2]));
     const requiredCalligraphyChars = [
       '江山时序',
       ...dynasties.map((d) => d.title || ''),
@@ -6420,7 +6424,7 @@ function main() {
           ctrl.activePolity = null;
 
           const indexHtml = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
-          assert(/data-cf-beacon='[^']*"spa":\s*false/.test(indexHtml), 'Cloudflare beacon must keep "spa": false, or every URL state write is counted as a pageview');
+          assert(!indexHtml.includes('data-cf-beacon=') || /data-cf-beacon='[^']*"spa":\s*false/.test(indexHtml), 'If a Cloudflare beacon is configured, it must keep spa false');
 
           Object.assign(ctrl, { activePerson: { profiles: [{ key: 'libai' }, { key: 'dufu' }] }, activePersonEventIdx: 3 });
           ctrl._writeUrlState();

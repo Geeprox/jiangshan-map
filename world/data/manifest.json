@@ -1,0 +1,427 @@
+{
+  "schema": 1,
+  "upstreamChina": {
+    "repository": "DeanChensj/jiangshan-map",
+    "commit": "c4afe439e3102addbedb0c9775129b53109cf2d8",
+    "from": -403,
+    "files": {
+      "js/map_data.js": "b496cb243d298f629eb8f88d2a477b9a07fef1f26beff1e1747d42eec5e6bda5",
+      "js/china_geo_data.js": "5c8bd5202dab8eafb6047106884ec92d839a82a8020f9953f7fb6399604ca8ef",
+      "js/atlas_snapshots.js": "be12771f2c424c8e7fe352a4d6f6d1d33fd1fe6dc6193089a17aab2e53b67779",
+      "js/atlas_boot.js": "9074be717bd6948943dab39d0a7ec1420b4ff05aec085def4c9af2730a24bdcb",
+      "js/app.js": "2ab79015cc22b49f241e6329f9fd5f00d26712aed8ecccafc07722da3ce46819",
+      "js/lore_data.js": "7bcd66a301fe372b924a173c52596d5d36af571d88c2bdb89635b00e254b4afe",
+      "js/i18n_dict.js": "3ecf71a88fb4945c65886dd98811d66a775b05797f134e5e5138890f526906a3",
+      "js/zh_hant.js": "e97ea63fb175d3b83c1227a9abaa82542f7b040420069f511b9a6f9ae01a0c1e"
+    }
+  },
+  "cliopatria": {
+    "repository": "Seshat-Global-History-Databank/cliopatria",
+    "commit": "5f433377139a6eeaeacbdc894b70f8805b72c8b5",
+    "zipSha256": "e10a4e429fca708788ff9e7572a95fce801fae55852d217cffabc1c59cd4eed4",
+    "license": "CC-BY-4.0",
+    "originalRecords": 13797,
+    "geometryRepairCount": 13,
+    "chinaCoreRecordsExcluded": 927,
+    "clippedAgainstUpstreamChina": 1398,
+    "removedEmptyOrChinaOnly": 927,
+    "simplificationDegrees": 0.035,
+    "sourceUrl": "https://github.com/Seshat-Global-History-Databank/cliopatria/tree/5f433377139a6eeaeacbdc894b70f8805b72c8b5"
+  },
+  "range": [
+    -3400,
+    2024
+  ],
+  "shards": [
+    {
+      "from": -3400,
+      "to": -3301,
+      "file": "clio--3400.json",
+      "records": 1,
+      "sha256": "1726e90c8cc6a7f3951c07d3d9818833d61be27edb2a0f10cd678f2ff06e2394"
+    },
+    {
+      "from": -3300,
+      "to": -3201,
+      "file": "clio--3300.json",
+      "records": 1,
+      "sha256": "1726e90c8cc6a7f3951c07d3d9818833d61be27edb2a0f10cd678f2ff06e2394"
+    },
+    {
+      "from": -3200,
+      "to": -3101,
+      "file": "clio--3200.json",
+      "records": 2,
+      "sha256": "07bbf9b434a6d7646d683f5b32f0e6eadb6a3a97e8f6f992a9be809d6cea500d"
+    },
+    {
+      "from": -3100,
+      "to": -3001,
+      "file": "clio--3100.json",
+      "records": 2,
+      "sha256": "07bbf9b434a6d7646d683f5b32f0e6eadb6a3a97e8f6f992a9be809d6cea500d"
+    },
+    {
+      "from": -3000,
+      "to": -2901,
+      "file": "clio--3000.json",
+      "records": 4,
+      "sha256": "3bc1524880ee9b8be4693d1c68a1101026ffd1faac4886ab8eb4f8a5e52d0aee"
+    },
+    {
+      "from": -2900,
+      "to": -2801,
+      "file": "clio--2900.json",
+      "records": 4,
+      "sha256": "3bc1524880ee9b8be4693d1c68a1101026ffd1faac4886ab8eb4f8a5e52d0aee"
+    },
+    {
+      "from": -2800,
+      "to": -2701,
+      "file": "clio--2800.json",
+      "records": 4,
+      "sha256": "3bc1524880ee9b8be4693d1c68a1101026ffd1faac4886ab8eb4f8a5e52d0aee"
+    },
+    {
+      "from": -2700,
+      "to": -2601,
+      "file": "clio--2700.json",
+      "records": 3,
+      "sha256": "32104b6496309524c6e3706852fba61bccf6b8d385b81d21cfc40051aa1a8fb1"
+    },
+    {
+      "from": -2600,
+      "to": -2501,
+      "file": "clio--2600.json",
+      "records": 3,
+      "sha256": "32104b6496309524c6e3706852fba61bccf6b8d385b81d21cfc40051aa1a8fb1"
+    },
+    {
+      "from": -2500,
+      "to": -2401,
+      "file": "clio--2500.json",
+      "records": 3,
+      "sha256": "9e8f8fbaeb20af1e4cb41529ed1f2c67c40c961a49721e4e102d702069cdb742"
+    },
+    {
+      "from": -2400,
+      "to": -2301,
+      "file": "clio--2400.json",
+      "records": 3,
+      "sha256": "9e8f8fbaeb20af1e4cb41529ed1f2c67c40c961a49721e4e102d702069cdb742"
+    },
+    {
+      "from": -2300,
+      "to": -2201,
+      "file": "clio--2300.json",
+      "records": 6,
+      "sha256": "3bceb179d55f533d062c7f06378aba4b6ad464d213d8b0a3d107b36d0ac0b156"
+    },
+    {
+      "from": -2200,
+      "to": -2101,
+      "file": "clio--2200.json",
+      "records": 5,
+      "sha256": "48588bb0cb69174aae623c20319282739eaabc006d47ef195417ef7b4eabf2e2"
+    },
+    {
+      "from": -2100,
+      "to": -2001,
+      "file": "clio--2100.json",
+      "records": 6,
+      "sha256": "5e2cb516162718e82a0bc31b069a24fac92040766fa7a019b7d77f3ce763de53"
+    },
+    {
+      "from": -2000,
+      "to": -1901,
+      "file": "clio--2000.json",
+      "records": 4,
+      "sha256": "e1366bb82402c42ec8b6ea421fd2e5febc6667e3ad1e9b0cb909a1e5fef81309"
+    },
+    {
+      "from": -1900,
+      "to": -1801,
+      "file": "clio--1900.json",
+      "records": 4,
+      "sha256": "e1366bb82402c42ec8b6ea421fd2e5febc6667e3ad1e9b0cb909a1e5fef81309"
+    },
+    {
+      "from": -1800,
+      "to": -1701,
+      "file": "clio--1800.json",
+      "records": 13,
+      "sha256": "a308a2e05266d7125a29d3a9930d47983b78f75d3352a6b4577f60369084e306"
+    },
+    {
+      "from": -1700,
+      "to": -1601,
+      "file": "clio--1700.json",
+      "records": 6,
+      "sha256": "10dbeae27006cf99627ca0c9510e76465e869a9e232838f75d6aeba9d968f61a"
+    },
+    {
+      "from": -1600,
+      "to": -1501,
+      "file": "clio--1600.json",
+      "records": 10,
+      "sha256": "a988d591bf7d999ef8b0e6b1e6e459e38aa0676f28d21a3318c952e244f6456b"
+    },
+    {
+      "from": -1500,
+      "to": -1401,
+      "file": "clio--1500.json",
+      "records": 10,
+      "sha256": "8c5cb50f695647a7c67861ab51b7bbe5707411b5126e9c4c45e59e52b9eed479"
+    },
+    {
+      "from": -1400,
+      "to": -1301,
+      "file": "clio--1400.json",
+      "records": 7,
+      "sha256": "e351117acd10e911b6cfd57c23a4b8836c0f684b417e29fa396fdff48c998f89"
+    },
+    {
+      "from": -1300,
+      "to": -1201,
+      "file": "clio--1300.json",
+      "records": 15,
+      "sha256": "f01fab708fc7e2f192ab9eba3dce6b298ca2b89b82ea398f6d2470039e134a19"
+    },
+    {
+      "from": -1200,
+      "to": -1101,
+      "file": "clio--1200.json",
+      "records": 14,
+      "sha256": "2a6ebcbc4ac77a15e5325ca44e8eb2a95e67be01cbbd81856d2d02292f34f0b0"
+    },
+    {
+      "from": -1100,
+      "to": -1001,
+      "file": "clio--1100.json",
+      "records": 9,
+      "sha256": "cbd63daad04b84d75328966a5f6a8e3af3ae69f41689c0456fd613c37509ab1b"
+    },
+    {
+      "from": -1000,
+      "to": -901,
+      "file": "clio--1000.json",
+      "records": 11,
+      "sha256": "ba187e967f9eac5556b5550045692b5ca3c2e8a2d0fa3d3f5dbedac1c3dfa0bf"
+    },
+    {
+      "from": -900,
+      "to": -801,
+      "file": "clio--900.json",
+      "records": 14,
+      "sha256": "9bc5c58cdfbc15c858e7dcbb8a6368c235703b80cd4932137856d10c65be0bb1"
+    },
+    {
+      "from": -800,
+      "to": -701,
+      "file": "clio--800.json",
+      "records": 29,
+      "sha256": "591a4db94b4d36a1d2445da2c1a48a61d644faa623aa62919af5a858396104b1"
+    },
+    {
+      "from": -700,
+      "to": -601,
+      "file": "clio--700.json",
+      "records": 52,
+      "sha256": "1bf29070e23711e8fda6b97f514b539540fde1737876127eee8e04320c345c72"
+    },
+    {
+      "from": -600,
+      "to": -501,
+      "file": "clio--600.json",
+      "records": 62,
+      "sha256": "77479cdce490113a1ee3983abfe8faef520da73da8d01100a7f3c4fa0ebcfe13"
+    },
+    {
+      "from": -500,
+      "to": -401,
+      "file": "clio--500.json",
+      "records": 72,
+      "sha256": "86c74dbec2dc15509f6e1c00366182c005fe8a90800216a616d694f72e9b4c68"
+    },
+    {
+      "from": -400,
+      "to": -301,
+      "file": "clio--400.json",
+      "records": 132,
+      "sha256": "e76c9c9de9560655e3e1f2d7c932a775c3a2ad431de2f93b3ddb8ded99445fdb"
+    },
+    {
+      "from": -300,
+      "to": -201,
+      "file": "clio--300.json",
+      "records": 234,
+      "sha256": "285d25c3d69fe53c89ba692be99c4a8b9ccc5abaef60c10113599fdb45db24db"
+    },
+    {
+      "from": -200,
+      "to": -101,
+      "file": "clio--200.json",
+      "records": 148,
+      "sha256": "b14578a0f703288705421b8f04328a93e8c74f82c2144589c322b2f2a6f7f071"
+    },
+    {
+      "from": -100,
+      "to": -1,
+      "file": "clio--100.json",
+      "records": 184,
+      "sha256": "a9805899505ec68796fb901c21fe3e46c773569865f761502deafe10ba1f95b2"
+    },
+    {
+      "from": 0,
+      "to": 99,
+      "file": "clio-0.json",
+      "records": 126,
+      "sha256": "183cf54c36b70d276938082aa8827f126c2b25e2b9df55cc1b2d301c72ee0d7f"
+    },
+    {
+      "from": 100,
+      "to": 199,
+      "file": "clio-100.json",
+      "records": 108,
+      "sha256": "67e70aa1e57e399e5d0d515e316e79c4ef846f8ac1b4e40fa51899184ff87816"
+    },
+    {
+      "from": 200,
+      "to": 299,
+      "file": "clio-200.json",
+      "records": 128,
+      "sha256": "c5ff002daa29d6bc4b73cc9512dc941eb3b3199e0de15f092f88dded38ab085e"
+    },
+    {
+      "from": 300,
+      "to": 399,
+      "file": "clio-300.json",
+      "records": 165,
+      "sha256": "a366fd79fc18c954d61e16ee55a1b0dc7c7c68526daf7f94e09d9be7c3b4dbea"
+    },
+    {
+      "from": 400,
+      "to": 499,
+      "file": "clio-400.json",
+      "records": 255,
+      "sha256": "1cd20d1957ea1583a8934702903076f096e6fdf11203b9d6709d3dfb7ff52d33"
+    },
+    {
+      "from": 500,
+      "to": 599,
+      "file": "clio-500.json",
+      "records": 273,
+      "sha256": "f26acbad4f9d07dadd91a753f9d07a361120222297413ac1157d1bdc2e5ef520"
+    },
+    {
+      "from": 600,
+      "to": 699,
+      "file": "clio-600.json",
+      "records": 439,
+      "sha256": "ca1bd3162cf0475b36a018604d1b5734cd45a1323f57001c6dc75c203af7f7c0"
+    },
+    {
+      "from": 700,
+      "to": 799,
+      "file": "clio-700.json",
+      "records": 390,
+      "sha256": "6d477b2667646a6115a6659c958a1d0bcbd7f02f7244a4577d39f8674e81b8ad"
+    },
+    {
+      "from": 800,
+      "to": 899,
+      "file": "clio-800.json",
+      "records": 555,
+      "sha256": "39d86741a0e00842fd73e0165ae359be4f642a30eaf4204ddcc261afc04cde55"
+    },
+    {
+      "from": 900,
+      "to": 999,
+      "file": "clio-900.json",
+      "records": 508,
+      "sha256": "04f777a3c1bc8df03fe1488ffc5c4074efd235fe3d512de65937582329c5eb0d"
+    },
+    {
+      "from": 1000,
+      "to": 1099,
+      "file": "clio-1000.json",
+      "records": 757,
+      "sha256": "2f620b700f39a90690961a13b6084d556d7aa9fc5a49242974a82f0f7d5ad9c7"
+    },
+    {
+      "from": 1100,
+      "to": 1199,
+      "file": "clio-1100.json",
+      "records": 562,
+      "sha256": "57661fb0bc6333062808e2f7edc2393c1d7d137542ea1f6cf79a0b4ebe8052ea"
+    },
+    {
+      "from": 1200,
+      "to": 1299,
+      "file": "clio-1200.json",
+      "records": 918,
+      "sha256": "87c3a0c4e28f15a2a8ef0bae94415696a026c0afadeadfc9d78c7aa51d5ef14a"
+    },
+    {
+      "from": 1300,
+      "to": 1399,
+      "file": "clio-1300.json",
+      "records": 831,
+      "sha256": "f8b8a7e3d0681ba31d02322f63b12097015860a25adb23abb452f06c37b0a5f4"
+    },
+    {
+      "from": 1400,
+      "to": 1499,
+      "file": "clio-1400.json",
+      "records": 950,
+      "sha256": "4ebddf28f1ca83e96cf1d0a9413394843fdc7cdfb37ba6d89cb762d1f128fa6a"
+    },
+    {
+      "from": 1500,
+      "to": 1599,
+      "file": "clio-1500.json",
+      "records": 903,
+      "sha256": "bfe0b70537324abf93a4f7af6ffab6e296282b993ea8da88dd7b2c832087727d"
+    },
+    {
+      "from": 1600,
+      "to": 1699,
+      "file": "clio-1600.json",
+      "records": 853,
+      "sha256": "0898b80cddae306feda611e6a224ee956d9a1a3faab71d217b45fef1ea77c076"
+    },
+    {
+      "from": 1700,
+      "to": 1799,
+      "file": "clio-1700.json",
+      "records": 1184,
+      "sha256": "ae088828f3f68d1871de81cfcddf252ca5e41b4a658d287969083326927d0479"
+    },
+    {
+      "from": 1800,
+      "to": 1899,
+      "file": "clio-1800.json",
+      "records": 1700,
+      "sha256": "8b5a81627a882c8fe8aeecec731b8838336d9555492dea8020f45dd118a574c5"
+    },
+    {
+      "from": 1900,
+      "to": 1999,
+      "file": "clio-1900.json",
+      "records": 1347,
+      "sha256": "1fb2ac59ba96ae3cc8441cede3f8dedde2fa4cbab12c253e41ffd24114af7dd7"
+    },
+    {
+      "from": 2000,
+      "to": 2024,
+      "file": "clio-2000.json",
+      "records": 418,
+      "sha256": "042362182cd223b5c1ad1fafd78e335f1ce1db376a244c86922328f2cf7471d3"
+    }
+  ],
+  "policy": "Original China bundles are immutable. China layers use upstream chronology and geometry. Cliopatria is excluded from the upstream modern-China footprint; overlapping historical China layers take visual priority. Before -403 the protected China region has no supplied historical layer.",
+  "timeline": {
+    "file": "timeline.json",
+    "sha256": "835e1c2e45b1bf1847a01439c5cba0978f09bbfeae8a02f412ff2a1af00e3e4f"
+  }
+}
