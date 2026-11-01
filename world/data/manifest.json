@@ -419,7 +419,7 @@
       "sha256": "042362182cd223b5c1ad1fafd78e335f1ce1db376a244c86922328f2cf7471d3"
     }
   ],
-  "policy": "Original China bundles are immutable. China layers use upstream chronology and geometry. Cliopatria is excluded from the upstream modern-China footprint; overlapping historical China layers take visual priority. Before -403 the protected China region has no supplied historical layer.",
+  "policy": "Original China bundles are immutable. China layers use upstream chronology and geometry. Cliopatria is excluded from the upstream modern-China footprint; overlapping historical China layers take visual priority. From circa -2070 through -404, China uses separately documented official-source evidence points, not reconstructed political borders; before circa -2070 it has no supplied evidence layer.",
   "timeline": {
     "file": "timeline.json",
     "sha256": "81c28c8d72a24dfa55f6b5c2abcb58de1c8e96cf3f30b1d43e3caf3c9f3b749f"

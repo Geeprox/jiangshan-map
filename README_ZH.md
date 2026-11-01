@@ -1,17 +1,79 @@
-# 江山时序 · 世界舆图（Geeprox Fork）
+# 江山时序 · 世界历史地图与时间轴
 
-在原项目中国历史舆图之外增加 Cliopatria 全球疆域时间轴。保留原作的宣纸配色与中国舆图交互。
+<p><a href="README.md">English</a> · <strong>简体中文</strong></p>
 
-- 中国舆图：`/`，原始中国数据与控制器保持不变。
-- 全球舆图：`/world/`，支持前3400年到2024年、年份滑块、播放、当前政权检索、地域缩放与来源说明。
-- 本地运行：`python3 -m http.server 8000`，访问 `http://localhost:8000/world/`。
-- 中国数据沿用上游 `c4afe439`，包含原项目台湾省、南海相关岛屿和线条。中国部分不使用 Cliopatria 替换。前403年以前，中国图层暂缺。
-- 全球数据来自 Cliopatria `5f433377`（CC BY 4.0）；各记录按原始起止年生效，不生成插值疆域。海外几何经过简化和中国范围裁切；数据覆盖、精度和关系可能不一致。
-- 原站统计脚本和外部字体请求已移除。所有核心地图资源均随站点分发。
+基于 [DeanChensj/jiangshan-map](https://github.com/DeanChensj/jiangshan-map) 拓展的**世界历史地图与多轨时间轴**。在保留中国历代地图及宣纸、宋体、朱红视觉的基础上，接入**公元前3400年至2024年**的全球疆域记录，让不同国家与政权在同一时间刻度下对照。
 
-详见 [数据与维护说明](world/README.md)。原作及代码许可仍为 GPL-3.0；数据和第三方库各自保留原许可。
+## 能做什么
 
----
+- **同年看世界**：世界地图位于 `/world/`，中国详细地图位于 `/`，可按同一年份切换查看。
+- **多轨时间轴**：中国分期与国家／历史政权使用同一刻度、同一条纵向游标；色带长度体现持续时间。支持拖动游标、双指缩放和横向平移。
+- **选择国家与 Pin**：默认展示视野内的重要同时代政权；可模糊搜索中英文名称并勾选，也可固定时间轴，让它跨视野、跨年份保留。选择、展示模式、Pin 和倍速保存在当前浏览器中。
+- **跨年代搜索**：结果直接出现在搜索框下，标明将前往的年份；选择后跳转年代并定位地图。保留材料原名，同时提供经过核对的简体中文参考名。
+- **旋转地球**：支持拖动旋转、缩放及平面地图切换；切换国家或大洲时自动定位。系统设置减少动态效果时直接定位。
+- **播放与逐年查看**：支持暂停、播放和 0.25×／0.5×／1×／2×；也可输入年份，或用时间游标的方向键调整。
+- **保留中国详细功能**：中国地图中的古今地名、州郡沿革、人物行迹、年号与寻址等功能继续保留。
+
+世界界面使用简体中文；中国详细地图继续保留英文和繁体中文选项。全球数据截至2024年，不能将其当作实时更新的现代国界服务。
+
+## 本地运行
+
+```sh
+git clone https://github.com/Geeprox/jiangshan-map.git
+cd jiangshan-map
+python3 -m http.server 8000
+```
+
+打开[世界时间轴](http://localhost:8000/world/)或[中国地图](http://localhost:8000/)。年份为负数表示公元前，例如 `/world/?year=-200`；`/world/?year=117&view=globe` 表示公元117年的地球视图。这里的地址是本地示例，不代表已提供公共在线演示。
+
+项目是纯静态网页，核心地图浏览不需要构建步骤、后端或 API 密钥。核心地图数据、D3 和字体子集随仓库分发，也可自行放入静态服务器或容器。个人部署配置不在公开仓库中。
+
+## 中国部分覆盖到哪里
+
+| 年代 | 展示内容 |
+| --- | --- |
+| 约公元前2070年以前 | 尚未提供中国早期证据层。 |
+| 约公元前2070年至前404年 | 夏、商、西周、春秋及战国前期衔接段；依据官方机构资料和考古研究展示遗址、都邑相关遗存及活动地域代表点。 |
+| 公元前403年起 | 沿用中国地图既有分期与疆域几何；世界视图展示到全球数据的2024年终点。 |
+
+中国原始八份 JS 数据与基础控制器文件保持与固定上游版本逐字节一致，包括原始台湾省轮廓、南海相关岛屿与线条。Cliopatria 不替换中国部分；早期中国通过独立扩展层接入两种视图。
+
+**早期点位不是推造的国界。** 夏商年代多为约值；按时期展示遗址，不表示游标当年该遗址一定已建成或仍在使用。坐标由本项目按资料地点作区域级定位，不是官方测绘坐标。前475—前404年的战国前期用于衔接常见分期与既有前403年的战国起点，不倒推后来的疆界。
+
+## 数据来源与许可
+
+| 内容 | 来源与固定版本 | 许可及使用方式 |
+| --- | --- | --- |
+| 中国地图、历史分期与原始疆域 | [DeanChensj/jiangshan-map · `c4afe439`](https://github.com/DeanChensj/jiangshan-map/tree/c4afe439e3102addbedb0c9775129b53109cf2d8) | [GPL-3.0](LICENSE)，保留原作者署名与许可。 |
+| 全球历史疆域 | [Seshat Cliopatria · `5f433377`](https://github.com/Seshat-Global-History-Databank/cliopatria/tree/5f433377139a6eeaeacbdc894b70f8805b72c8b5) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，本版的几何处理见下方说明。 |
+| 早期中国纪年、遗址与都邑 | [21条证据及21条官方机构参考资料](js/early_china_data.js)，包括[中国国家博物馆](https://www.chnmuseum.cn/portals/0/web/zt/gudai/detail2.html)、文物主管部门和考古研究资料 | 新增事实汇编为 CC BY 4.0；所链接原文和图片保留各自权利，不作为地图矢量成果重新授权或转载。 |
+| 现代陆地与海岸线背景 | [Natural Earth 1:110m land · v5.1.2](https://github.com/nvkelso/natural-earth-vector/blob/v5.1.2/geojson/ne_110m_land.geojson) | [公有领域](https://www.naturalearthdata.com/about/terms-of-use/)，仅作海岸线参照，不代表古代岸线。 |
+| 中文参考译名 | [Wikidata 标签快照](world/data/translations.json)，获取于2026-11-01，并结合人工对照名称 | Wikidata 结构化数据为 [CC0](https://www.wikidata.org/wiki/Wikidata:Licensing)；译名需与材料名称匹配，不仅凭 QID 自动套用。 |
+| 地图渲染库 | D3 7.9.0 | [ISC 许可](world/vendor/D3-LICENSE)，已本地打包。 |
+| 书法字体 | Google Fonts 的 Ma Shan Zheng，[字体子集清单](world/vendor/fonts/manifest.json) | [SIL OFL 1.1](world/vendor/fonts/OFL.txt)，已包含本地子集。 |
+
+Cliopatria 学术引用：Bennett, J. S., Mutch, E., Tollefson, A. 等（2025），*Scientific Data* **12**, 247。[论文与 DOI](https://doi.org/10.1038/s41597-025-04516-9)。
+
+### 数据怎样处理、有哪些限制
+
+- 按材料记录的起止年显示：`FromYear ≤ 所选年份 ≤ ToYear`，不在两张快照之间插值生成疆界。
+- 海外几何经过必要修复、0.035°容差简化、四位小数取整及按世纪拆分；与中国范围重叠的海外几何，按中国原始轮廓和当前历史图层裁切／遮罩。中国原始几何不做简化。
+- 不同地区、时期的资料覆盖与精度不一致；历史重建、附属关系和政权层级可能重叠。疆域是示意，不是精确测绘国界；空白不代表无人居住或独立。
+- [数据清单](world/data/manifest.json)记录来源版本、处理参数和文件哈希；[数据与维护说明](world/README.md)提供组合规则、重建步骤和校验方式。
+
+## 校验与贡献
+
+```sh
+node --test tests/world.test.mjs
+node scripts/validate_atlas.js
+```
+
+提交纠错时，请注明年份、政权／遗址、参考资料及相关地图或考古证据。参见[贡献指南](CONTRIBUTING_ZH.md)。代码继续采用 GPL-3.0；数据、字体和第三方库分别遵守上表许可，不将整仓材料一概标为同一种许可。
+
+<details>
+<summary>中国详细地图功能说明（继承自原作）</summary>
+
+下面保留中国详细地图的功能指南。其中在线演示和预览图属于原作中国地图；本分支的全球功能与当前数据规则以上文为准。
 
 # 江山时序 · Chronicles of the Realm
 
@@ -190,7 +252,7 @@ python3 skills/jiangshan-atlas/scripts/jiangshan.py --year 1079,1080,1094,1097 -
 项目为纯静态网页，无需安装任何依赖或构建工具，克隆后用任意静态服务器打开即可：
 
 ```bash
-git clone https://github.com/DeanChensj/jiangshan-map.git
+git clone https://github.com/Geeprox/jiangshan-map.git
 cd jiangshan-map
 python3 -m http.server 8000
 ```
@@ -234,3 +296,5 @@ hit.prefecture.properties.title; // 应天府（本身是 GeoJSON Feature，可�
 - **参与贡献**：参见 [中文贡献指南 (`CONTRIBUTING_ZH.md`)](CONTRIBUTING_ZH.md)（[English Contributing Guide](CONTRIBUTING.md)）了解项目结构、史料校勘规范与自动化校验流程。
 - **开源协议**：采用 **GPL-3.0**（见 [LICENSE](LICENSE)）。Copyright © 2026 DeanChensj。
   - **例外**：源自 CHGIS V6 与 Hartwell China Historical GIS 的府州郡政区边界及战国疆域数据，仍受其原始条款约束（仅限学术、非商业用途），不适用 GPL-3.0。
+
+</details>

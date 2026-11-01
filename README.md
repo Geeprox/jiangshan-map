@@ -1,17 +1,82 @@
-# 江山时序 · 世界舆图（Geeprox Fork）
+# 江山时序 · 世界历史地图与时间轴
 
-在原项目中国历史舆图之外增加 Cliopatria 全球疆域时间轴。保留原作的宣纸配色与中国舆图交互。
+**World Historical Atlas & Timeline**
 
-- 中国舆图：`/`，原始中国数据与控制器保持不变。
-- 全球舆图：`/world/`，支持前3400年到2024年、年份滑块、播放、当前政权检索、地域缩放与来源说明。
-- 本地运行：`python3 -m http.server 8000`，访问 `http://localhost:8000/world/`。
-- 中国数据沿用上游 `c4afe439`，包含原项目台湾省、南海相关岛屿和线条。中国部分不使用 Cliopatria 替换。前403年以前，中国图层暂缺。
-- 全球数据来自 Cliopatria `5f433377`（CC BY 4.0）；各记录按原始起止年生效，不生成插值疆域。海外几何经过简化和中国范围裁切；数据覆盖、精度和关系可能不一致。
-- 原站统计脚本和外部字体请求已移除。所有核心地图资源均随站点分发。
+从中国历史地图扩展到全球：在同一年对照不同国家与政权的疆域，在多轨时间轴上观察它们的存续与变化。
 
-详见 [数据与维护说明](world/README.md)。原作及代码许可仍为 GPL-3.0；数据和第三方库各自保留原许可。
+<p><strong>English</strong> · <a href="README_ZH.md">简体中文</a></p>
 
----
+This Geeprox fork expands [DeanChensj/jiangshan-map](https://github.com/DeanChensj/jiangshan-map) into a **world historical atlas and shared timeline**, with worldwide territory records from **3400 BCE to 2024 CE**. It retains the China atlas and its paper-and-ink visual language, and adds a globe, country comparison tracks, cross-period search and an early-China evidence layer.
+
+## Explore the world in one year
+
+- **Two connected views:** `/world/` for global comparison; `/` for the detailed China atlas, including historical places, administrative divisions and person chronicles.
+- **One shared timescale:** China periods and country/polity tracks align under one draggable playhead. Colored segments reflect their duration; pinch to zoom the timeline and scroll horizontally to pan.
+- **Choose and pin countries:** automatically show important contemporaries in the map viewport, use bilingual fuzzy-search checkboxes for manual comparison, or pin a track so it stays across viewport and year changes. Selections, display mode, pins and playback speed are saved in this browser.
+- **Search across periods:** results appear beside the field with their destination year. Select a result to load that year and move to its map location. Source names are retained alongside checked Simplified Chinese reference names.
+- **Globe and flat map:** drag to rotate the globe, zoom, or choose a country/continent to animate the camera. Reduced-motion preferences use immediate positioning.
+- **Playback:** pause or play at 0.25×, 0.5×, 1× or 2×; enter a year directly or move the time cursor with the keyboard.
+
+The world interface is in Simplified Chinese. The inherited China view also retains its English and Traditional Chinese options. World coverage ends in 2024 because that is the pinned global dataset's endpoint; it is not a live border feed.
+
+## Run locally
+
+```sh
+git clone https://github.com/Geeprox/jiangshan-map.git
+cd jiangshan-map
+python3 -m http.server 8000
+```
+
+Open [the world timeline](http://localhost:8000/world/) or [the China atlas](http://localhost:8000/). Negative year values mean BCE, for example `/world/?year=-200`; `/world/?year=117&view=globe` opens 117 CE. These links are local examples, not a hosted public demo.
+
+The application is a static site: no build step, backend or API key is required for core map browsing. Core map data, D3 and the font subset are distributed with the repository. It can also be served from a static web server or container; private deployment settings are not included here.
+
+## China coverage and source priority
+
+| Period | What this edition displays |
+| --- | --- |
+| Before circa 2070 BCE | No China evidence layer is supplied. |
+| Circa 2070–404 BCE | Xia, Shang, Western Zhou, Spring and Autumn, and an early Warring States bridge: official-institution references support archaeological sites, capital-related remains and activity-region representative points. |
+| 403 BCE onward | The inherited China chronology and territory geometry. The world view uses these layers through its 2024 endpoint. |
+
+The original eight China JS bundles remain byte-identical to the pinned upstream version. This includes the upstream Taiwan-province geometry, South China Sea island rings and maritime line layer. Cliopatria does not replace those China layers. Early periods are added through a separate runtime extension to both views.
+
+**Early evidence points are not reconstructed borders.** Xia/Shang dates can be approximate; period-level evidence does not establish that a site existed or was occupied in every cursor year. Coordinates are project-added regional representative points, not official survey coordinates. The 475–404 BCE bridge connects a common Warring States periodization to the inherited atlas's unchanged 403 BCE start.
+
+## Data sources and licenses
+
+| Component | Source / pinned version | License and use |
+| --- | --- | --- |
+| China atlas, chronology and original territory geometry | [DeanChensj/jiangshan-map · `c4afe439`](https://github.com/DeanChensj/jiangshan-map/tree/c4afe439e3102addbedb0c9775129b53109cf2d8) | [GPL-3.0](LICENSE); upstream attribution retained. |
+| Worldwide territory records | [Seshat Cliopatria · `5f433377`](https://github.com/Seshat-Global-History-Databank/cliopatria/tree/5f433377139a6eeaeacbdc894b70f8805b72c8b5) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); derived worldwide geometry is processed as described below. |
+| Early-China chronology and evidence | [21 records and 21 official-institution references](js/early_china_data.js), including the [National Museum of China](https://www.chnmuseum.cn/portals/0/web/zt/gudai/detail2.html), government heritage agencies and archaeological research | New factual compilation: CC BY 4.0. Linked source texts and images retain their own rights; they are not relicensed or reproduced as map vectors. |
+| Modern land / coastline background | [Natural Earth 1:110m land · v5.1.2](https://github.com/nvkelso/natural-earth-vector/blob/v5.1.2/geojson/ne_110m_land.geojson) | [Public domain](https://www.naturalearthdata.com/about/terms-of-use/). A coastline reference, not an ancient shoreline reconstruction. |
+| Chinese reference names | [Wikidata label snapshot](world/data/translations.json), retrieved 2026-11-01, plus curated aliases | Structured Wikidata data: [CC0](https://www.wikidata.org/wiki/Wikidata:Licensing). Labels are used only after source-name matching; a source QID alone is not accepted as proof. |
+| Map rendering | D3 7.9.0 | [ISC license](world/vendor/D3-LICENSE), vendored locally. |
+| Calligraphy font | Ma Shan Zheng, from Google Fonts; [subset manifest](world/vendor/fonts/manifest.json) | [SIL OFL 1.1](world/vendor/fonts/OFL.txt); a local subset is included. |
+
+Cliopatria citation: Bennett, J. S., Mutch, E., Tollefson, A. et al. (2025), *Scientific Data* **12**, 247. [Article and DOI](https://doi.org/10.1038/s41597-025-04516-9).
+
+### Processing and limitations
+
+- Worldwide records retain their source validity intervals: `FromYear ≤ selected year ≤ ToYear`. Boundaries are **not interpolated** between snapshots.
+- Overseas geometry is repaired where needed, simplified at 0.035° tolerance, rounded to four decimal places and split into century files. China-overlapping foreign geometry is clipped/masked according to the inherited China footprint and selected historical layers. Original China geometry is not simplified.
+- Source periods and regional coverage are uneven. Historical reconstructions, overlapping dependencies and missing records should not be read as precise surveyed borders; a blank area does not mean it was uninhabited or independent.
+- [The manifest](world/data/manifest.json) records source revisions, transformation parameters and file hashes. [The maintenance guide](world/README.md) explains the composition policy, rebuild steps and checks.
+
+## Checks and contributions
+
+```sh
+node --test tests/world.test.mjs
+node scripts/validate_atlas.js
+```
+
+Corrections should identify the year, entity/site, source and relevant map or archaeological evidence. See [CONTRIBUTING.md](CONTRIBUTING.md). Code remains under GPL-3.0; data, fonts and third-party libraries retain the separate licenses above.
+
+<details>
+<summary>Detailed China-atlas guide inherited from the original project</summary>
+
+The following guide describes the inherited China view. Its online demos and preview images belong to the original China atlas; worldwide features and current source policy are described above.
 
 # Chronicles of the Realm · 江山时序
 
@@ -190,7 +255,7 @@ In browser automation environments (Playwright) or WebMCP-enabled AI browsers (`
 No dependencies or build steps required. Clone and serve with any static HTTP server:
 
 ```bash
-git clone https://github.com/DeanChensj/jiangshan-map.git
+git clone https://github.com/Geeprox/jiangshan-map.git
 cd jiangshan-map
 python3 -m http.server 8000
 ```
@@ -234,3 +299,5 @@ After exporting, serve the repository (`python3 -m http.server 8000`) and open `
 - **Contributing**: See [CONTRIBUTING.md](CONTRIBUTING.md) ([中文贡献指南](CONTRIBUTING_ZH.md)) for repository structure, data conventions, and validation checks.
 - **License**: Released under **GPL-3.0** (see [LICENSE](LICENSE)). Copyright © 2026 DeanChensj.
   - **Exception**: Prefecture-level boundaries and Warring States territories derived from CHGIS V6 and the Hartwell China Historical GIS remain subject to their original terms (academic, non-commercial use only) and are not relicensed under GPL-3.0.
+
+</details>
