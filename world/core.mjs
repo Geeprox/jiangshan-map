@@ -1,11 +1,12 @@
+import{selectEarlyChina}from'./early.mjs?v=20261101-4';
 /** Pure temporal/source policy. China selection mirrors the pinned upstream controller. */
-export const MIN_YEAR=-3400, MAX_YEAR=2024, CHINA_MIN_YEAR=-403;
+export const MIN_YEAR=-3400, MAX_YEAR=2024, CHINA_MIN_YEAR=-2070, UPSTREAM_CHINA_MIN_YEAR=-403;
 export function normalizeYear(raw,fallback=741){const n=Number(raw);if(!Number.isFinite(n))return fallback;return Math.max(MIN_YEAR,Math.min(MAX_YEAR,Math.round(n)||1));}
 export function formatYear(y){return y<0?`公元前 ${Math.abs(y)} 年`:`公元 ${y} 年`;}
 export function shardStart(y){return Math.floor(y/100)*100;}
 export function activeRecords(records,y){return records.filter(f=>f.from<=y&&y<=f.to);}
 export function selectChinaSnapshot(w,y){
- if(y<CHINA_MIN_YEAR)return {key:null,dynasty:null,features:[],maritime:[],regions:[]};
+ if(y<UPSTREAM_CHINA_MIN_YEAR)return selectEarlyChina(w.EARLY_CHINA_DATA,y)||{key:null,dynasty:null,features:[],evidence:[],maritime:[],regions:[]};
  const d=[...w.DYNASTY_DATA].reverse().find(d=>y>=d.fromYear);
  const ph=d.phases&&(d.phases.find(p=>y<p.until)||d.phases.at(-1));
  const key=ph?ph.snap:`s_${d.key}`,s=w.ATLAS_SNAPSHOTS[key];
@@ -50,3 +51,6 @@ export function boundTimelineRange(range){const span=Math.max(MIN_TIMELINE_SPAN,
 /** Positive scale zooms in. A moved center also pans without changing the anchor year. */
 export function zoomTimelineRange(range,scale,anchor=.5,newAnchor=anchor){if(!Number.isFinite(scale)||scale<=0)return [...range];const span=Math.max(MIN_TIMELINE_SPAN,Math.min(MAX_YEAR+1-MIN_YEAR,(range[1]-range[0])/scale)),year=range[0]+anchor*(range[1]-range[0]);return boundTimelineRange([year-newAnchor*span,year+(1-newAnchor)*span]);}
 export function panTimelineRange(range,fraction){const shift=(range[1]-range[0])*fraction;return boundTimelineRange([range[0]+shift,range[1]+shift]);}
+
+/** Pins are independent of viewport, year and checkbox filters; keep insertion order. */
+export function mergePinnedTracks(countries,picked,pinned){const byKey=new Map(countries.map(c=>[c.key,c])),fixed=[...pinned].map(k=>byKey.get(k)).filter(Boolean),keys=new Set(fixed.map(c=>c.key));return {...picked,rows:[...fixed,...picked.rows.filter(c=>!keys.has(c.key))]};}

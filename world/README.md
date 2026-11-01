@@ -35,8 +35,28 @@ before shipping. The renderer also masks those polygons against that footprint
 and the selected historical China polities. Foreign labels are excluded from
 the protected geometries. The mask and source geometry are derived at runtime
 from the immutable upstream files; no substitute modern China dataset is used.
-Before -403, the protected China area has no historical layer. It is not filled
-using Cliopatria, and the UI states that coverage is unavailable.
+From circa -2070 through -404, an independent official-source evidence layer
+shows activity-region representative points, archaeological sites and capitals.
+Its five periods are Xia, Shang (early/late phases), Western Zhou, Spring and
+Autumn, and an early Warring States bridge (-475 through -404). The bridge leaves
+the original -403 start unchanged. Before circa -2070, China coverage remains
+unavailable. Cliopatria does not fill either interval inside the protected area.
+
+`../js/early_china_data.js` contains 21 reviewed official-institution references,
+21 records, period chronology, source links and uncertainty notes. It is a new
+factual compilation under CC BY 4.0; source texts and images retain their rights.
+Coordinates are project-added regional representative points, not official survey
+coordinates. Contextual period evidence does not establish occupation, capital
+status or existence in every selected year. Approximate archaeological date spans
+are displayed separately from dynasty dates. No early political boundary polygons
+are inferred from archaeological cultures, cultural contacts or later snapshots.
+
+The legacy China view uses a runtime addon (`../js/early_china.js`), which prepends
+the five periods and extends the existing settlements/timeline UI. It preserves
+original source objects, lazy-loads the original snapshots, and restores evidence
+snapshots after lazy loading. Early years do not borrow later royal era labels.
+The world view uses `early.mjs` and renders the same evidence as points on both
+the globe and flat view. Every point exposes its precision and official links.
 
 This is a source-composition rule for this edition. The original intervals,
 occupational descriptions and historical names of the China view are retained.
@@ -70,6 +90,12 @@ track; all tracks share one proportional timescale, one vertical playhead and a
 draggable top handle. The default folds small/out-of-view entities; a bilingual
 fuzzy-search checkbox picker retains manual choices in local browser storage.
 Out-of-view and inactive manual selections fold without clearing those choices.
+A pin button beside each country name fixes that track ahead of automatic/manual
+rows in insertion order. Pins survive viewport changes, year changes and browser
+reloads in local storage. Inactive pinned tracks remain with a No record this year
+label and an available unpin button; clicking the country name still focuses the
+map when a contemporary record exists. Unchecking a pinned item in the picker
+also removes its pin.
 The disclosure button explicitly says Expand/Collapse country tracks. If the panel
 was automatically collapsed on mobile, it automatically opens on a desktop
 viewport; explicit user disclosure choices are respected. When automatic viewport

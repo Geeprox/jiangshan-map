@@ -3984,7 +3984,7 @@ function main() {
     const maShanLinkMatch = indexHtml.match(
       /<link href="(https:\/\/fonts\.googleapis\.com\/css2\?family=Ma\+Shan\+Zheng&text=([^"&]+)&display=swap)" rel="stylesheet" \/>/
     );
-    const localFont = indexHtml.includes('href="world/vendor/fonts/fonts.css"') && JSON.parse(fs.readFileSync(path.join(ROOT, 'world/vendor/fonts/manifest.json'), 'utf8'));
+    const localFont = /href="world\/vendor\/fonts\/fonts\.css(?:\?v=[0-9-]+)?"/.test(indexHtml) && JSON.parse(fs.readFileSync(path.join(ROOT, 'world/vendor/fonts/manifest.json'), 'utf8'));
     assert(maShanLinkMatch || localFont, 'Expected synchronous subsetted Ma Shan Zheng stylesheet');
     if (localFont) {
       assert.strictEqual(require('crypto').createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'world/vendor/fonts', localFont.file))).digest('hex'), localFont.sha256);
