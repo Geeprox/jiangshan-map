@@ -119,7 +119,7 @@ Pinch the timeline on a trackpad (ctrl+wheel events, plus Safari GestureEvent) o
 with two touchscreen contacts to zoom around the gesture midpoint. Horizontal
 trackpad scrolling pans the visible interval. All tracks share that interval,
 clamped to 10–5,425 years; zooming does not seek the selected year. An offscreen
-playhead has a Locate action. Explicit zoom/fit controls offer the same operation.
+playhead has a Locate action. Zoom buttons and the full-range selector offer the same operation.
 The globe canvas and timeline toolbar adapt to the actual mobile viewport.
 Module and stylesheet release queries prevent stale dependencies during upgrades.
 The current and adjacent century shards are cached; hidden-page autoplay stops.
@@ -141,3 +141,30 @@ The raw ZIP is intentionally not redistributed in this repository. Generated
 shards retain the required source attribution and their original validity fields.
 No household deployment address, credential or NAS private configuration belongs
 in this public repository.
+
+## Search and control behavior
+
+The search field has one focus boundary and a nearby result panel. It searches
+all source-name polities, China periods, the early evidence records and map areas,
+using the same guarded Chinese references and original names as the map. Exact
+and prefix name matches rank first. Current-year results retain the current year;
+other results declare their destination year before selection. Choosing a result
+loads that year and frames the location. Typing alone never changes the year.
+Enter selects the first result; arrows enter and traverse the result buttons,
+Escape dismisses results, and Clear restores the empty search. No-results text
+offers an exit. Search queries stay in this page.
+
+Controls use the existing paper, ink and vermilion vocabulary. Country selection
+is a labelled modal with immediate checkbox feedback, Escape and focus restoration.
+Display modes persist separately from selected countries and pins. Explicit
+all-in-view and contemporary modes show the full advertised set. Ordinary map
+labels describe the geography and time; implementation provenance lives in the
+data dialog. The redundant full-range button is folded into the range selector.
+
+Narrow layouts support 320px without horizontal scrolling; short viewports can
+scroll vertically to all controls. Search inputs use 16px on mobile. Year bubbles
+are clamped using their measured width. Every timeline band uses a measured AA
+text color against its actual active/inactive fill, while retaining the source
+color categories. If a century fails to load, the last successful map and year
+remain together; Retry requests the failed year. An empty year entry restores
+the current year. Original China source bundles and all territory data are unchanged.

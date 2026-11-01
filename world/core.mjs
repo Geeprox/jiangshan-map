@@ -1,4 +1,4 @@
-import{selectEarlyChina}from'./early.mjs?v=20261101-4';
+import{selectEarlyChina}from'./early.mjs?v=20261101-6';
 /** Pure temporal/source policy. China selection mirrors the pinned upstream controller. */
 export const MIN_YEAR=-3400, MAX_YEAR=2024, CHINA_MIN_YEAR=-2070, UPSTREAM_CHINA_MIN_YEAR=-403;
 export function normalizeYear(raw,fallback=741){const n=Number(raw);if(!Number.isFinite(n))return fallback;return Math.max(MIN_YEAR,Math.min(MAX_YEAR,Math.round(n)||1));}
@@ -37,7 +37,7 @@ export function chooseTimelineCountries(countries,{year,bounds,mode='auto',selec
  if(mode==='auto'){
   const continents=new Set();for(const x of ranked){if(chosen.length>=limit)break;if(continents.has(x.country.continent))continue;continents.add(x.country.continent);chosen.push(x);}
   for(const x of ranked){if(chosen.length>=limit)break;if(!chosen.includes(x))chosen.push(x);}
- }else chosen=ranked.slice(0,mode==='viewport'?50:100);
+ }else chosen=ranked;
  const selected=countries.find(c=>c.key===selectedId||c.states.some(s=>s.id===selectedId));
  if(selected&&!chosen.some(x=>x.country===selected))chosen.unshift({country:selected,state:currentState(selected,year)});
  return{rows:chosen.map(x=>x.country),hiddenCount:Math.max(0,active.length-chosen.length),outsideCount:active.length-inside.length,activeCount:active.length,viewportFallback};
