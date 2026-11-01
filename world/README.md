@@ -73,7 +73,23 @@ Out-of-view and inactive manual selections fold without clearing those choices.
 Keyboard arrows move one year, Shift+arrows move ten, and Home/End move to range
 ends. Mobile starts with comparison tracks collapsed.
 The local Ma Shan Zheng subset is from Google Fonts under OFL-1.1 (see
-`vendor/fonts/OFL.txt`). The map uses Equal Earth projection; SVG polygons and labels zoom together.
+`vendor/fonts/OFL.txt`). The world map defaults to an orthographic globe facing China. Drag to rotate;
+country and continent selections animate a spherical shortest-path rotation,
+zoom out for long travel, then zoom in at the destination. Dragging cancels the
+flight. Reduced-motion settings use an immediate camera update. The flat Equal
+Earth overview remains available; its central meridian now passes through China.
+Both modes read the identical immutable China source geometry. While moving, a
+canvas renderer draws those same coordinates and protection masks without SVG
+path-string allocation; the settled view uses the original detailed SVG paths. Backside globe
+labels and viewport tracks are filtered by visible projected positions.
+
+Pinch the timeline on a trackpad (ctrl+wheel events, plus Safari GestureEvent) or
+with two touchscreen contacts to zoom around the gesture midpoint. Horizontal
+trackpad scrolling pans the visible interval. All tracks share that interval,
+clamped to 10–5,425 years; zooming does not seek the selected year. An offscreen
+playhead has a Locate action. Explicit zoom/fit controls offer the same operation.
+The globe canvas and timeline toolbar adapt to the actual mobile viewport.
+Module and stylesheet release queries prevent stale dependencies during upgrades.
 The current and adjacent century shards are cached; hidden-page autoplay stops.
 
 ## Rebuild and checks

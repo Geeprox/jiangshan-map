@@ -1,0 +1,17 @@
+/** Animate the same source geometries on a canvas; settle back to the detailed SVG. */
+export class GlobeCanvas{
+ constructor({canvas,svg,getScene,label,color,orient}){Object.assign(this,{canvas,svg,getScene,label,color,orient});this.foreign=document.createElement('canvas');this.font=getComputedStyle(document.body).getPropertyValue('--serif-stack')||'serif';}
+ get active(){return !this.canvas.hidden;}
+ hide(){this.canvas.hidden=true;document.getElementById('world-camera').style.opacity='';}
+ render(projection,transform,W,H){const r=this.svg.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1),width=Math.round(r.width*dpr),height=Math.round(r.height*dpr);if(this.canvas.width!==width||this.canvas.height!==height){this.canvas.width=this.foreign.width=width;this.canvas.height=this.foreign.height=height;}const ctx=this.canvas.getContext('2d'),foreign=this.foreign.getContext('2d'),scale=width/W,k=transform.k,scene=this.getScene();
+  const begin=c=>{c.resetTransform();c.clearRect(0,0,width,height);c.scale(scale,scale);c.translate(transform.x,transform.y);c.scale(k,k);};begin(ctx);begin(foreign);const path=window.d3.geoPath(projection,ctx),fp=window.d3.geoPath(projection,foreign);
+  const paint=(g,fill,stroke,line=.5,alpha=1,oriented=true)=>{ctx.beginPath();path(oriented?this.orient(g):g);if(fill){ctx.fillStyle=fill;ctx.globalAlpha=alpha;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=line;ctx.globalAlpha=1;ctx.stroke();}ctx.globalAlpha=1;};
+  paint({type:'Sphere'},'#d6dfdc66','#9eaaa188',1,1,false);paint(window.d3.geoGraticule10(),null,'#8e9a8d30',.55,1,false);paint(scene.land,'#e9e2d5','#b8ad9760',.45,1,false);
+  for(const f of scene.records){foreign.beginPath();fp(this.orient(f.geometry));foreign.fillStyle=this.color(f);foreign.globalAlpha=.45;foreign.fill();foreign.globalAlpha=.47;foreign.strokeStyle='#554b3f';foreign.lineWidth=.5/(scale*k);foreign.stroke();}
+  foreign.globalAlpha=1;foreign.globalCompositeOperation='destination-out';for(const g of [...scene.modern,...(scene.china?.features||[]).map(f=>f.geometry)]){foreign.beginPath();fp(this.orient(g));foreign.fillStyle='#000';foreign.fill();}foreign.globalCompositeOperation='source-over';ctx.save();ctx.resetTransform();ctx.drawImage(this.foreign,0,0);ctx.restore();
+  for(const f of (scene.china?.features||[]))paint(f.geometry,this.color(f),'#554b3f77',.65/(scale*k),.46);for(const g of (scene.china?.maritime||[]))paint(g,'#b5452f','#b5452f',.4/(scale*k));
+  const boxes=[];ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.font=`${13/k}px ${this.font}`;ctx.lineJoin='round';ctx.lineWidth=3/k;const center=projection.rotate();for(const f of scene.labels){if(!globePointVisible(f.point,center))continue;const xy=projection(f.point),text=this.label(f);if(text.length>34&&f.source!=='jiangshan-map')continue;const width=ctx.measureText(text).width+8/k,box=[xy[0]-width/2,xy[1]-17/k,xy[0]+width/2,xy[1]];if(boxes.some(b=>box[0]<b[2]&&box[2]>b[0]&&box[1]<b[3]&&box[3]>b[1]))continue;boxes.push(box);ctx.strokeStyle='#f6f2e8';ctx.strokeText(text,xy[0],xy[1]);ctx.fillStyle=f.source==='jiangshan-map'?'#8e3f2b':'#3f352c';ctx.fillText(text,xy[0],xy[1]);}
+  this.canvas.hidden=false;document.getElementById('world-camera').style.opacity='0';
+ }
+}
+import{globePointVisible}from'./camera.mjs?v=20261101-2';

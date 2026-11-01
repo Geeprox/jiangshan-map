@@ -26,7 +26,7 @@ export function progressForYear(year,range){return Math.max(0,Math.min(1,(year-r
 export function yearForProgress(p,range){return normalizeYear(Math.min(range[1]-1,Math.round(range[0]+Math.max(0,Math.min(1,p))*(range[1]-range[0]))));}
 export function timelineBand(b,range){const from=Math.max(b.from,range[0]),to=Math.min(b.to,range[1]);return to>from?{...b,from,to,left:(from-range[0])/(range[1]-range[0]),width:(to-from)/(range[1]-range[0])}:null;}
 export function currentState(country,year){return country.states.filter(s=>s.from<=year&&year<=s.to).sort((a,b)=>b.area-a.area)[0];}
-export function inViewport(point,bounds){return point&&point[0]>=bounds[0][0]&&point[0]<=bounds[1][0]&&point[1]>=bounds[0][1]&&point[1]<=bounds[1][1];}
+export function inViewport(point,bounds){return !!point&&(bounds[0][0]<=bounds[1][0]?(point[0]>=bounds[0][0]&&point[0]<=bounds[1][0]):(point[0]>=bounds[0][0]||point[0]<=bounds[1][0]))&&point[1]>=bounds[0][1]&&point[1]<=bounds[1][1]&&(!bounds.contains||bounds.contains(point));}
 export function chooseTimelineCountries(countries,{year,bounds,mode='auto',selectedId=null,limit=6}){
  const active=countries.map(c=>({country:c,state:currentState(c,year)})).filter(x=>mode==='history'||x.state);
  const inside=active.filter(x=>inViewport(x.state?.point||x.country.point,bounds));
@@ -43,3 +43,9 @@ export function chooseTimelineCountries(countries,{year,bounds,mode='auto',selec
 
 /** Manual choices persist separately from their currently visible projection. */
 export function manualTimelineCountries(countries,{year,bounds,checked}){const chosen=countries.filter(c=>checked.has(c.key)),rows=chosen.filter(c=>{const state=currentState(c,year);return state&&inViewport(state.point,bounds);});return {rows,hiddenCount:chosen.length-rows.length,outsideCount:chosen.length-rows.length,activeCount:chosen.length};}
+
+export const MIN_TIMELINE_SPAN=10;
+export function boundTimelineRange(range){const span=Math.max(MIN_TIMELINE_SPAN,Math.min(MAX_YEAR+1-MIN_YEAR,range[1]-range[0]));const lo=Math.max(MIN_YEAR,Math.min(MAX_YEAR+1-span,range[0]));return [lo,lo+span];}
+/** Positive scale zooms in. A moved center also pans without changing the anchor year. */
+export function zoomTimelineRange(range,scale,anchor=.5,newAnchor=anchor){if(!Number.isFinite(scale)||scale<=0)return [...range];const span=Math.max(MIN_TIMELINE_SPAN,Math.min(MAX_YEAR+1-MIN_YEAR,(range[1]-range[0])/scale)),year=range[0]+anchor*(range[1]-range[0]);return boundTimelineRange([year-newAnchor*span,year+(1-newAnchor)*span]);}
+export function panTimelineRange(range,fraction){const shift=(range[1]-range[0])*fraction;return boundTimelineRange([range[0]+shift,range[1]+shift]);}
