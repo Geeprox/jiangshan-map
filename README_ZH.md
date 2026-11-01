@@ -4,6 +4,12 @@
 
 基于 [DeanChensj/jiangshan-map](https://github.com/DeanChensj/jiangshan-map) 拓展的**世界历史地图与多轨时间轴**。在保留中国历代地图及宣纸、宋体、朱红视觉的基础上，接入**公元前3400年至2024年**的全球疆域记录，让不同国家与政权在同一时间刻度下对照。
 
+[**打开世界版演示 →**](https://geeprox.github.io/jiangshan-map/world/) · [中国地图](https://geeprox.github.io/jiangshan-map/)
+
+![公元1250年的世界历史地图：欧亚非地球视角与同步多轨时间轴](assets/world-timeline-1250.jpg)
+
+*公元1250年，面向欧亚非的地球视角；下方以1000年共同刻度对照中国分期与同时代政权。截图来自本项目，数据来源见下文。*
+
 ## 能做什么
 
 - **同年看世界**：世界地图位于 `/world/`，中国详细地图位于 `/`，可按同一年份切换查看。
@@ -24,7 +30,7 @@ cd jiangshan-map
 python3 -m http.server 8000
 ```
 
-打开[世界时间轴](http://localhost:8000/world/)或[中国地图](http://localhost:8000/)。年份为负数表示公元前，例如 `/world/?year=-200`；`/world/?year=117&view=globe` 表示公元117年的地球视图。这里的地址是本地示例，不代表已提供公共在线演示。
+打开[世界时间轴](http://localhost:8000/world/)或[中国地图](http://localhost:8000/)。年份为负数表示公元前，例如 `/world/?year=-200`；`/world/?year=117&view=globe` 表示公元117年的地球视图。
 
 项目是纯静态网页，核心地图浏览不需要构建步骤、后端或 API 密钥。核心地图数据、D3 和字体子集随仓库分发，也可自行放入静态服务器或容器。个人部署配置不在公开仓库中。
 

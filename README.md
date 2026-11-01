@@ -8,6 +8,12 @@
 
 This Geeprox fork expands [DeanChensj/jiangshan-map](https://github.com/DeanChensj/jiangshan-map) into a **world historical atlas and shared timeline**, with worldwide territory records from **3400 BCE to 2024 CE**. It retains the China atlas and its paper-and-ink visual language, and adds a globe, country comparison tracks, cross-period search and an early-China evidence layer.
 
+[**Open the world demo →**](https://geeprox.github.io/jiangshan-map/world/) · [China atlas](https://geeprox.github.io/jiangshan-map/)
+
+![World historical atlas in 1250 CE: Eurasia and Africa with synchronized country timelines](assets/world-timeline-1250.jpg)
+
+*1250 CE, globe view facing Eurasia and Africa. The shared 1,000-year timeline compares China periods with contemporaneous polities. Screenshot from this application; data credits are listed below.*
+
 ## Explore the world in one year
 
 - **Two connected views:** `/world/` for global comparison; `/` for the detailed China atlas, including historical places, administrative divisions and person chronicles.
@@ -27,7 +33,7 @@ cd jiangshan-map
 python3 -m http.server 8000
 ```
 
-Open [the world timeline](http://localhost:8000/world/) or [the China atlas](http://localhost:8000/). Negative year values mean BCE, for example `/world/?year=-200`; `/world/?year=117&view=globe` opens 117 CE. These links are local examples, not a hosted public demo.
+Open [the world timeline](http://localhost:8000/world/) or [the China atlas](http://localhost:8000/). Negative year values mean BCE, for example `/world/?year=-200`; `/world/?year=117&view=globe` opens 117 CE.
 
 The application is a static site: no build step, backend or API key is required for core map browsing. Core map data, D3 and the font subset are distributed with the repository. It can also be served from a static web server or container; private deployment settings are not included here.
 
