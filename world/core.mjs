@@ -1,4 +1,4 @@
-import{selectEarlyChina}from'./early.mjs?v=20261101-6';
+import{selectEarlyChina}from'./early.mjs?v=20261103-1';
 /** Pure temporal/source policy. China selection mirrors the pinned upstream controller. */
 export const MIN_YEAR=-3400, MAX_YEAR=2024, CHINA_MIN_YEAR=-2070, UPSTREAM_CHINA_MIN_YEAR=-403;
 export function normalizeYear(raw,fallback=741){const n=Number(raw);if(!Number.isFinite(n))return fallback;return Math.max(MIN_YEAR,Math.min(MAX_YEAR,Math.round(n)||1));}
@@ -53,4 +53,4 @@ export function zoomTimelineRange(range,scale,anchor=.5,newAnchor=anchor){if(!Nu
 export function panTimelineRange(range,fraction){const shift=(range[1]-range[0])*fraction;return boundTimelineRange([range[0]+shift,range[1]+shift]);}
 
 /** Pins are independent of viewport, year and checkbox filters; keep insertion order. */
-export function mergePinnedTracks(countries,picked,pinned){const byKey=new Map(countries.map(c=>[c.key,c])),fixed=[...pinned].map(k=>byKey.get(k)).filter(Boolean),keys=new Set(fixed.map(c=>c.key));return {...picked,rows:[...fixed,...picked.rows.filter(c=>!keys.has(c.key))]};}
+export function mergePinnedTracks(countries,picked,pinned,selectedId){const byKey=new Map(countries.map(c=>[c.key,c])),selected=countries.find(c=>c.states.some(s=>s.id===selectedId)),fixed=[...(selected?[selected]:[]),...[...pinned].map(k=>byKey.get(k)).filter(Boolean)],seen=new Set();return {...picked,rows:[...fixed,...picked.rows].filter(c=>!seen.has(c.key)&&seen.add(c.key))};}

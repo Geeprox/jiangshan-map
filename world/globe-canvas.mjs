@@ -1,3 +1,4 @@
+import{labelMetrics}from'./map-labels.mjs?v=20261103-1';
 /** Animate the same source geometries on a canvas; settle back to the detailed SVG. */
 export class GlobeCanvas{
  constructor({canvas,svg,getScene,label,color,orient}){Object.assign(this,{canvas,svg,getScene,label,color,orient});this.foreign=document.createElement('canvas');this.font=getComputedStyle(document.body).getPropertyValue('--serif-stack')||'serif';}
@@ -11,8 +12,8 @@ export class GlobeCanvas{
   foreign.globalAlpha=1;foreign.globalCompositeOperation='destination-out';for(const g of [...scene.modern,...(scene.china?.features||[]).map(f=>f.geometry)]){foreign.beginPath();fp(this.orient(g));foreign.fillStyle='#000';foreign.fill();}foreign.globalCompositeOperation='source-over';ctx.save();ctx.resetTransform();ctx.drawImage(this.foreign,0,0);ctx.restore();
   for(const f of (scene.china?.features||[]))paint(f.geometry,this.color(f),'#554b3f77',.65/(scale*k),.46);for(const g of (scene.china?.maritime||[]))paint(g,'#b5452f','#b5452f',.4/(scale*k));
   const center=projection.rotate();for(const f of scene.china?.evidence||[]){if(!globePointVisible(f.point,center))continue;const xy=projection(f.point);ctx.beginPath();ctx.arc(xy[0],xy[1],4.5/k,0,Math.PI*2);ctx.fillStyle=f.kind==='activity'?'#f6f2e8':this.color(f);ctx.fill();ctx.strokeStyle='#8e3f2b';ctx.lineWidth=1.2/k;ctx.stroke();}
-  const boxes=[];ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.font=`${13/k}px ${this.font}`;ctx.lineJoin='round';ctx.lineWidth=3/k;for(const f of scene.labels){if(!globePointVisible(f.point,center))continue;const xy=projection(f.point),text=this.label(f);if(f.source==='china-official')xy[1]-=9/k;if(text.length>34&&f.source!=='jiangshan-map')continue;const width=ctx.measureText(text).width+8/k,box=[xy[0]-width/2,xy[1]-17/k,xy[0]+width/2,xy[1]];if(boxes.some(b=>box[0]<b[2]&&box[2]>b[0]&&box[1]<b[3]&&box[3]>b[1]))continue;boxes.push(box);ctx.strokeStyle='#f6f2e8';ctx.strokeText(text,xy[0],xy[1]);ctx.fillStyle=f.source==='jiangshan-map'||f.source==='china-official'?'#8e3f2b':'#3f352c';ctx.fillText(text,xy[0],xy[1]);}
+  const boxes=[];ctx.textAlign='center';ctx.textBaseline='alphabetic';const metrics=labelMetrics(W,r.width,k);ctx.font=`${metrics.font}px ${this.font}`;ctx.lineJoin='round';ctx.lineWidth=metrics.halo;for(const f of scene.labels){if(!globePointVisible(f.point,center))continue;const xy=projection(f.point),text=this.label(f);if(f.source==='china-official')xy[1]-=9/k;if(text.length>34&&f.source!=='jiangshan-map')continue;const width=ctx.measureText(text).width+metrics.gap,box=[xy[0]-width/2,xy[1]-metrics.height,xy[0]+width/2,xy[1]];if(boxes.some(b=>box[0]<b[2]&&box[2]>b[0]&&box[1]<b[3]&&box[3]>b[1]))continue;boxes.push(box);ctx.strokeStyle='#f6f2e8';ctx.strokeText(text,xy[0],xy[1]);ctx.fillStyle=f.source==='jiangshan-map'||f.source==='china-official'?'#8e3f2b':'#3f352c';ctx.fillText(text,xy[0],xy[1]);}
   this.canvas.hidden=false;document.getElementById('world-camera').style.opacity='0';
  }
 }
-import{globePointVisible}from'./camera.mjs?v=20261101-6';
+import{globePointVisible}from'./camera.mjs?v=20261103-1';

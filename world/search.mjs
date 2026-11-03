@@ -1,5 +1,5 @@
-import{fuzzyMatch}from'./names.mjs?v=20261101-6';
-import{currentState,MIN_YEAR,MAX_YEAR,normalizeYear,formatYear}from'./core.mjs?v=20261101-6';
+import{fuzzyMatch}from'./names.mjs?v=20261103-1';
+import{currentState,MIN_YEAR,MAX_YEAR,normalizeYear,formatYear}from'./core.mjs?v=20261103-1';
 const plain=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 export function buildSearchIndex({countries,dynasties,evidence,label,regions=[]}){
  return [...countries.map(c=>({key:c.key,kind:'country',name:label(c),original:c.name,country:c})),

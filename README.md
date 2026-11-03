@@ -57,7 +57,7 @@ The original eight China JS bundles remain byte-identical to the pinned upstream
 | Worldwide territory records | [Seshat Cliopatria · `5f433377`](https://github.com/Seshat-Global-History-Databank/cliopatria/tree/5f433377139a6eeaeacbdc894b70f8805b72c8b5) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); derived worldwide geometry is processed as described below. |
 | Early-China chronology and evidence | [21 records and 21 official-institution references](js/early_china_data.js), including the [National Museum of China](https://www.chnmuseum.cn/portals/0/web/zt/gudai/detail2.html), government heritage agencies and archaeological research | New factual compilation: CC BY 4.0. Linked source texts and images retain their own rights; they are not relicensed or reproduced as map vectors. |
 | Modern land / coastline background | [Natural Earth 1:110m land · v5.1.2](https://github.com/nvkelso/natural-earth-vector/blob/v5.1.2/geojson/ne_110m_land.geojson) | [Public domain](https://www.naturalearthdata.com/about/terms-of-use/). A coastline reference, not an ancient shoreline reconstruction. |
-| Chinese reference names | [Wikidata label snapshot](world/data/translations.json), retrieved 2026-11-01, plus curated aliases | Structured Wikidata data: [CC0](https://www.wikidata.org/wiki/Wikidata:Licensing). Labels are used only after source-name matching; a source QID alone is not accepted as proof. |
+| Chinese reference names | [Wikidata label snapshot](world/data/translations.json), retrieved 2026-11-03, plus curated aliases | Structured Wikidata data: [CC0](https://www.wikidata.org/wiki/Wikidata:Licensing). Labels are used only after source-name matching; a source QID alone is not accepted as proof. |
 | Map rendering | D3 7.9.0 | [ISC license](world/vendor/D3-LICENSE), vendored locally. |
 | Calligraphy font | Ma Shan Zheng, from Google Fonts; [subset manifest](world/vendor/fonts/manifest.json) | [SIL OFL 1.1](world/vendor/fonts/OFL.txt); a local subset is included. |
 
@@ -69,6 +69,10 @@ Cliopatria citation: Bennett, J. S., Mutch, E., Tollefson, A. et al. (2025), *Sc
 - Overseas geometry is repaired where needed, simplified at 0.035° tolerance, rounded to four decimal places and split into century files. China-overlapping foreign geometry is clipped/masked according to the inherited China footprint and selected historical layers. Original China geometry is not simplified.
 - Source periods and regional coverage are uneven. Historical reconstructions, overlapping dependencies and missing records should not be read as precise surveyed borders; a blank area does not mean it was uninhabited or independent.
 - [The manifest](world/data/manifest.json) records source revisions, transformation parameters and file hashes. [The maintenance guide](world/README.md) explains the composition policy, rebuild steps and checks.
+
+### Entity introductions
+
+Selecting a map entity temporarily pins its timeline above other country tracks; closing the detail or selecting another entity releases that temporary pin. Manual pins remain saved. Details show locally stored Chinese Wikidata descriptions only after name matching, or reviewed summaries with direct institutional references. The 2026-11-03 snapshot supports 651 country entries; missing descriptions are explicitly marked pending verification. [Reviewed profiles](world/profiles.mjs) distinguish historical periodization from map-record validity. Wikidata structured descriptions are CC0; new editorial summaries are CC BY 4.0, without reproducing the linked articles.
 
 ## Checks and contributions
 

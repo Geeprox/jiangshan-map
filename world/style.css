@@ -55,3 +55,20 @@ dialog{border:1px solid var(--control-border);border-radius:14px;padding:28px;ba
 @media(max-width:360px){.world-seal{font-size:20px}.world-nav a,.world-nav button{font-size:10px;padding:7px 4px}.timeline-filters,.timeline-scale{gap:5px}.track-toolbar label{gap:4px}.track-toolbar select{max-width:103px}.track-toolbar .action-btn{padding:5px 7px}.world-key{max-width:195px}}
 @media(prefers-reduced-motion:reduce){.world-page *{transition:none!important;animation:none!important}}
 @media(forced-colors:active){.world-page :focus-visible{outline:2px solid Highlight!important}.world-page button[aria-pressed=true]{border:1px solid Highlight}.world-page .band-cell{border-inline-end:1px solid CanvasText}}
+/* A selected map entity anchors one temporary track; clicking its pin makes it persistent. */
+.continent-row.is-temporary .continent-track{outline:1px dashed #796447;outline-offset:1px}
+.continent-row.is-temporary .track-pin{color:#635137;background:#79644718}
+.temporary-pin-label{font:10px/1.5 var(--sans-stack);color:#635137;border:1px dashed #9a8b76;border-radius:4px;padding:0 4px;white-space:nowrap}
+.country-track-label:has(.temporary-pin-label){flex-wrap:wrap;column-gap:5px}
+/* Reserve a real inset for the disclosure arrow at every breakpoint. */
+.world-page .track-toolbar select{appearance:none;-webkit-appearance:none;padding:6px 32px 6px 12px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23594e41' stroke-width='1.5' viewBox='0 0 12 12'%3E%3Cpath d='m2 4 4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;background-size:12px;border-radius:8px}
+/* No native page pinch inside the timeline, including grid gaps, labels and padding. */
+#scrubber-dock{touch-action:pan-y}
+#polity-detail #detail-introduction h3{font:600 13px/1.5 var(--sans-stack);margin:18px 0 6px}
+#polity-detail #detail-introduction p{font-size:13px;line-height:1.85;margin:6px 0 10px}
+.profile-context,.profile-empty{color:var(--text-muted)}
+.profile-sources{display:grid;gap:8px;margin:12px 0 18px}.profile-sources a{font:11px/1.6 var(--sans-stack);color:var(--vermilion);overflow-wrap:anywhere;text-underline-offset:3px}
+.detail-map-note{margin-top:14px;font:11px/1.6 var(--sans-stack);color:var(--text-muted)}.detail-map-note summary{cursor:pointer;padding:5px 0}
+@media(max-width:680px){#polity-detail #detail-introduction p{font-size:14px}.world-page .track-toolbar select{padding-inline:10px 30px;background-position:right 10px center}.world-page #country-filter{max-width:118px}.world-page #time-range{max-width:116px}}
+
+@media(max-width:680px){.world-workspace:has(#polity-detail:not([hidden])){grid-template-rows:minmax(175px,1fr) 210px}#polity-detail #detail-introduction h3{margin-top:10px}.temporary-pin-label{font-size:9px}}

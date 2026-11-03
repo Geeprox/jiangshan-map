@@ -54,7 +54,7 @@ python3 -m http.server 8000
 | 全球历史疆域 | [Seshat Cliopatria · `5f433377`](https://github.com/Seshat-Global-History-Databank/cliopatria/tree/5f433377139a6eeaeacbdc894b70f8805b72c8b5) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，本版的几何处理见下方说明。 |
 | 早期中国纪年、遗址与都邑 | [21条证据及21条官方机构参考资料](js/early_china_data.js)，包括[中国国家博物馆](https://www.chnmuseum.cn/portals/0/web/zt/gudai/detail2.html)、文物主管部门和考古研究资料 | 新增事实汇编为 CC BY 4.0；所链接原文和图片保留各自权利，不作为地图矢量成果重新授权或转载。 |
 | 现代陆地与海岸线背景 | [Natural Earth 1:110m land · v5.1.2](https://github.com/nvkelso/natural-earth-vector/blob/v5.1.2/geojson/ne_110m_land.geojson) | [公有领域](https://www.naturalearthdata.com/about/terms-of-use/)，仅作海岸线参照，不代表古代岸线。 |
-| 中文参考译名 | [Wikidata 标签快照](world/data/translations.json)，获取于2026-11-01，并结合人工对照名称 | Wikidata 结构化数据为 [CC0](https://www.wikidata.org/wiki/Wikidata:Licensing)；译名需与材料名称匹配，不仅凭 QID 自动套用。 |
+| 中文参考译名 | [Wikidata 标签快照](world/data/translations.json)，获取于2026-11-03，并结合人工对照名称 | Wikidata 结构化数据为 [CC0](https://www.wikidata.org/wiki/Wikidata:Licensing)；译名需与材料名称匹配，不仅凭 QID 自动套用。 |
 | 地图渲染库 | D3 7.9.0 | [ISC 许可](world/vendor/D3-LICENSE)，已本地打包。 |
 | 书法字体 | Google Fonts 的 Ma Shan Zheng，[字体子集清单](world/vendor/fonts/manifest.json) | [SIL OFL 1.1](world/vendor/fonts/OFL.txt)，已包含本地子集。 |
 
@@ -66,6 +66,10 @@ Cliopatria 学术引用：Bennett, J. S., Mutch, E., Tollefson, A. 等（2025）
 - 海外几何经过必要修复、0.035°容差简化、四位小数取整及按世纪拆分；与中国范围重叠的海外几何，按中国原始轮廓和当前历史图层裁切／遮罩。中国原始几何不做简化。
 - 不同地区、时期的资料覆盖与精度不一致；历史重建、附属关系和政权层级可能重叠。疆域是示意，不是精确测绘国界；空白不代表无人居住或独立。
 - [数据清单](world/data/manifest.json)记录来源版本、处理参数和文件哈希；[数据与维护说明](world/README.md)提供组合规则、重建步骤和校验方式。
+
+### 国家与区域介绍
+
+点击地图实体会将对应时间轨道临时固定在国家轨道顶部；关闭详情或切换实体后解除，手动固定继续保存。详情优先显示带机构资料出处的人工核对简介，其余使用通过名称匹配的本地 Wikidata 中文简述。2026-11-03 快照可为651个国家条目提供简述；未覆盖的明确标注待核实。[核对过的介绍](world/profiles.mjs)将历史分期与地图记录年代区分。Wikidata 结构化简述使用 CC0；新增编写的简介使用 CC BY 4.0，不转载所链接文章。
 
 ## 校验与贡献
 

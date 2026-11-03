@@ -168,3 +168,7 @@ text color against its actual active/inactive fill, while retaining the source
 color categories. If a century fails to load, the last successful map and year
 remain together; Retry requests the failed year. An empty year entry restores
 the current year. Original China source bundles and all territory data are unchanged.
+
+## Entity details and mobile labels
+
+`profiles.mjs` holds reviewed reference names, paraphrased introductions and source links; `translations.json` also stores Chinese Wikidata descriptions and source revisions (CC0). Description lookup uses the same guarded name matching as labels. Curated historical context does not alter source validity dates or any China geometry. A selected map country temporarily leads country tracks without writing to saved pins; manual pinning promotes it. Screen-sized map labels are shared by SVG and motion canvas; dock-wide pinch handling includes gaps while native single-finger controls and vertical list scrolling remain available.
