@@ -135,3 +135,15 @@ dialog{border:1px solid var(--control-border);border-radius:14px;padding:28px;ba
  .world-key{display:none}.map-actions{bottom:8px}.map-top{top:8px}
 }
 @media(min-width:681px) and (max-width:1000px) and (max-height:500px){#timeline-mobile-controls .year-stepper{max-width:170px;justify-self:start;width:100%;box-sizing:border-box}}
+/* The mobile settings dialog is a form, not a wrapped toolbar. */
+#timeline-settings .track-toolbar{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+#timeline-settings .timeline-filters,#timeline-settings .timeline-scale{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0}
+#timeline-settings .track-toolbar label{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;font:12px/1.5 var(--sans-stack);color:var(--text-secondary)}
+#timeline-settings .track-toolbar select{width:100%;min-width:0;max-width:none;min-height:42px;margin:0;font-size:14px;background-position:right 14px center;padding-inline:12px 36px}
+#timeline-settings #track-picker-open,#timeline-settings #timeline-locate{width:100%;min-height:38px;border:1px solid var(--control-border);border-radius:8px;background:var(--control-fill);font-size:13px;text-align:center}
+#timeline-settings #country-expand{display:none}
+#timeline-settings .timeline-zoom-controls{display:grid;grid-template-columns:40px minmax(0,1fr) 40px;min-height:40px;border-radius:8px;padding:0 2px}
+#timeline-settings .timeline-zoom-controls button{width:36px;height:36px;border-radius:6px}
+#timeline-settings #timeline-density{font-size:12px;text-align:center}
+#timeline-settings .settings-done{margin-top:24px}
+#timeline-settings .settings-done button{width:100%;min-height:42px;border-radius:9px;background:var(--text-main);color:#fffaf0;font-size:14px}
