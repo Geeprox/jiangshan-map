@@ -1,7 +1,7 @@
-import{bandColors}from'./colors.mjs?v=20261103-1';
-import{bindTimelineGestures}from'./gestures.mjs?v=20261103-1';
-import{fuzzyMatch}from'./names.mjs?v=20261103-1';
-import{MIN_YEAR,MAX_YEAR,CHINA_MIN_YEAR,formatYear,normalizeYear,nextSpeed,PLAY_SPEED_STEPS,progressForYear,yearForProgress,timelineBand,chooseTimelineCountries,manualTimelineCountries,currentState,inViewport,zoomTimelineRange,panTimelineRange,boundTimelineRange,mergePinnedTracks}from'./core.mjs?v=20261103-1';
+import{bandColors}from'./colors.mjs?v=20261103-3';
+import{bindTimelineGestures}from'./gestures.mjs?v=20261103-3';
+import{fuzzyMatch}from'./names.mjs?v=20261103-3';
+import{MIN_YEAR,MAX_YEAR,CHINA_MIN_YEAR,formatYear,normalizeYear,nextSpeed,PLAY_SPEED_STEPS,progressForYear,yearForProgress,timelineBand,chooseTimelineCountries,manualTimelineCountries,currentState,inViewport,zoomTimelineRange,panTimelineRange,boundTimelineRange,mergePinnedTracks}from'./core.mjs?v=20261103-3';
 const $=id=>document.getElementById(id);
 const PLAY='<svg class="ico-svg" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><polygon points="4.5,2.8 13.2,8 4.5,13.2" fill="currentColor"/></svg>',PAUSE='<svg class="ico-svg" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><rect x="3.8" y="3" width="3" height="10" fill="currentColor"/><rect x="9.2" y="3" width="3" height="10" fill="currentColor"/></svg>';
 const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
@@ -15,17 +15,22 @@ export class WorldTimeline{
   try{const saved=JSON.parse(localStorage.getItem('jiangshan-world-tracks'));if(Array.isArray(saved)){this.checked=new Set(saved.filter(k=>data.countries.some(c=>c.key===k)));this.mode='manual';$('country-filter').value='manual';}}catch{}
   try{const mode=localStorage.getItem('jiangshan-world-track-mode');if(['auto','viewport','manual','all'].includes(mode)){this.mode=mode;$('country-filter').value=mode;}}catch{}
   $('country-filter').onchange=e=>{if(e.target.value==='manual'&&this.mode!=='manual')this.seedSelection();this.mode=e.target.value;this.persistMode();this.renderRows();};
-  $('track-picker-open').onclick=()=>{this.stop();this.renderPicker();$('track-picker').showModal();$('track-picker-search').focus();};
-  $('track-picker').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();$('track-picker').close();}});$('track-picker').addEventListener('close',()=>$('track-picker-open').focus({preventScroll:true}));
+  $('track-picker-open').onclick=()=>{if($('timeline-settings').open)$('timeline-settings').close();this.stop();this.renderPicker();$('track-picker').showModal();$('track-picker-search').focus();};
+  $('track-picker').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();$('track-picker').close();}});$('track-picker').addEventListener('close',()=>(this.compact?$('timeline-settings-open'):$('track-picker-open')).focus({preventScroll:true}));
   $('track-picker-search').oninput=()=>this.renderPicker();$('track-picker-outside').onchange=()=>this.renderPicker();
   $('track-picker-auto').onclick=()=>{this.mode='auto';this.checked.clear();try{localStorage.removeItem('jiangshan-world-tracks');}catch{}$('country-filter').value='auto';this.persistMode();this.renderRows();this.renderPicker();};$('country-expand').onclick=()=>{this.mode=this.mode==='auto'?'all':'auto';$('country-filter').value=this.mode;this.persistMode();this.renderRows();if($('country-expand').hidden)$('country-filter').focus({preventScroll:true});};
   $('time-range').onchange=e=>{if(e.target.value==='custom')return;this.stop();const y=getYear();if(e.target.value==='full')this.range=[MIN_YEAR,2025];else if(e.target.value==='china')this.range=[CHINA_MIN_YEAR,2025];else{const span=Number(e.target.value),lo=Math.max(MIN_YEAR,Math.min(2025-span,y-span/2));this.range=[Math.round(lo),Math.round(lo+span)];}this.drawMain();this.sync();};
-  this.panelPreference=null;const compact=matchMedia('(max-width:680px)');this.setPanelOpen(!compact.matches);compact.addEventListener('change',e=>{if(this.panelPreference===null)this.setPanelOpen(!e.matches);});
+  this.panelPreference=null;const compact=matchMedia('(max-width:680px), (max-width:1000px) and (max-height:500px)');this.adaptLayout(compact.matches);this.setPanelOpen(!compact.matches);compact.addEventListener('change',e=>{this.adaptLayout(e.matches);if(this.panelPreference===null)this.setPanelOpen(!e.matches||!!this.getSelected());});
+  $('timeline-settings-open').onclick=()=>{this.stop();$('timeline-settings').showModal();};$('timeline-settings').addEventListener('close',()=>{if(this.compact)$('timeline-settings-open').focus({preventScroll:true});});
   $('continent-toggle').onclick=()=>{this.panelPreference=$('country-track-panel').hidden;this.setPanelOpen(this.panelPreference);};
   bindTimelineGestures({dock:$('scrubber-dock'),rail:$('scrubber-track'),getRange:()=>this.range,setRange:r=>this.setViewRange(r),seek:p=>this.setYear(yearForProgress(p,this.range)),stop:()=>this.stop(),onActive:active=>$('scrubber-dock').classList.toggle('is-scaling',active)});
   $('timeline-zoom-in').onclick=()=>this.zoom(1.6);$('timeline-zoom-out').onclick=()=>this.zoom(1/1.6);$('timeline-locate').onclick=()=>{const span=this.range[1]-this.range[0];this.setViewRange([this.getYear()-span/2,this.getYear()+span/2]);};
   this.attachTrack($('scrubber-track'));this.attachTrack($('timeline-drag-handle'),$('scrubber-track'));this.drawMain();this.sync();
   this.observer=new ResizeObserver(()=>this.layout());this.observer.observe($('scrubber-dock'));this.observer.observe($('country-track-panel'));window.addEventListener('resize',()=>this.layout());
+ }
+ adaptLayout(compact){this.compact=compact;const dock=$('scrubber-dock'),primary=$('timeline-mobile-controls'),playback=dock.querySelector('.playback-controls-group'),options=$('timeline-options'),year=document.querySelector('.year-stepper'),settings=$('timeline-settings-open'),locate=$('timeline-locate');
+  if(compact){primary.hidden=false;settings.hidden=false;primary.append($('act-autoplay'),$('act-play-speed'),year,$('continent-toggle'),settings,locate);$('timeline-settings-content').append(options);}
+  else{if($('timeline-settings').open)$('timeline-settings').close();playback.append($('act-autoplay'),$('act-play-speed'),$('continent-toggle'));options.querySelector('.timeline-scale').append(locate);options.append(year);dock.insertBefore(options,$('country-track-panel'));dock.insertBefore(settings,primary.nextSibling);primary.hidden=true;settings.hidden=true;}this.layout();
  }
  selectionChanged(){const key=this.getSelected()?.id;if(key&&key!==this.selectionId){this.setPanelOpen(true);$('country-track-panel').scrollTop=0;}this.selectionId=key;if(key)this.sync();else this.renderRows();}
  setPanelOpen(open){$('country-track-panel').hidden=!open;$('continent-toggle').setAttribute('aria-expanded',String(open));$('continent-toggle').textContent=open?'收起对照':'展开对照';this.layout();}

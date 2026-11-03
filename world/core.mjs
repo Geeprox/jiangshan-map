@@ -1,4 +1,4 @@
-import{selectEarlyChina}from'./early.mjs?v=20261103-1';
+import{selectEarlyChina}from'./early.mjs?v=20261103-3';
 /** Pure temporal/source policy. China selection mirrors the pinned upstream controller. */
 export const MIN_YEAR=-3400, MAX_YEAR=2024, CHINA_MIN_YEAR=-2070, UPSTREAM_CHINA_MIN_YEAR=-403;
 export function normalizeYear(raw,fallback=741){const n=Number(raw);if(!Number.isFinite(n))return fallback;return Math.max(MIN_YEAR,Math.min(MAX_YEAR,Math.round(n)||1));}

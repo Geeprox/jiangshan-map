@@ -1,4 +1,4 @@
-import{labelMetrics}from'./map-labels.mjs?v=20261103-1';
+import{labelMetrics}from'./map-labels.mjs?v=20261103-3';
 /** Animate the same source geometries on a canvas; settle back to the detailed SVG. */
 export class GlobeCanvas{
  constructor({canvas,svg,getScene,label,color,orient}){Object.assign(this,{canvas,svg,getScene,label,color,orient});this.foreign=document.createElement('canvas');this.font=getComputedStyle(document.body).getPropertyValue('--serif-stack')||'serif';}
@@ -16,4 +16,4 @@ export class GlobeCanvas{
   this.canvas.hidden=false;document.getElementById('world-camera').style.opacity='0';
  }
 }
-import{globePointVisible}from'./camera.mjs?v=20261103-1';
+import{globePointVisible}from'./camera.mjs?v=20261103-3';

@@ -1,4 +1,4 @@
-import{zoomTimelineRange,panTimelineRange}from'./core.mjs?v=20261103-1';
+import{zoomTimelineRange,panTimelineRange}from'./core.mjs?v=20261103-3';
 /** The whole dock owns pinch, including gutters. Single-finger controls/scroll keep their native behavior. */
 export function bindTimelineGestures({dock,rail,getRange,setRange,seek,stop,onActive=()=>{}}){
  const points=new Map();let pinch=null,pending=null,usedPinch=false,safari=null,frame=null,nextRange,suppressClickUntil=0;

@@ -1,4 +1,4 @@
-import{matchedReference}from'./names.mjs?v=20261103-1';
+import{matchedReference}from'./names.mjs?v=20261103-3';
 // Editorial summaries are paraphrases, not copied articles. Dates below describe history, not shard validity.
 export const profiles={
  'Nara Japan':{name:'奈良时代',summary:'日本古代以平城京为中心的历史时期。710年迁都平城京，律令制度与天平文化在这一时期发展；784年迁都长冈京，通常作为奈良时代的终点。',note:'历史分期通常为710—784年；地图材料的710—787年是其自身的记录区间，两者并不相同。',sources:[['日本国土交通省 · 平城京','https://www.kkr.mlit.go.jp/asuka/initiatives-heijo/about.html'],['奈良县立万叶文化馆 · 平城京','https://manyo-hyakka.pref.nara.jp/db/detailLink?cls=db_yougo3&pkey=22']]},
