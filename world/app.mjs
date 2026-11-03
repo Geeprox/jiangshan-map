@@ -105,4 +105,4 @@ function setup(){
  $('sources-dialog').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();$('sources-dialog').close();}});$('sources-dialog').addEventListener('close',()=>$('sources-open').focus({preventScroll:true}));
  $('friday-link').hidden=document.documentElement.dataset.portal!=='friday';
 }
-try{[manifest,land,timelineData,translations]=await Promise.all([loadJson('data/manifest.json'),loadJson('data/land.geojson'),loadJson('data/timeline.json'),loadJson('data/translations.json')]);setup();await renderYear(year);}catch(e){$('map-status').textContent='';$('error-text').textContent='地图数据暂时无法展开。请刷新页面重试。';$('map-error').hidden=false;$('retry').onclick=()=>location.reload();}
+try{[manifest,land,timelineData,translations]=await Promise.all([loadJson('data/manifest.json'),loadJson('data/land.geojson'),loadJson('data/timeline.json'),loadJson('data/translations.json?v=20261103-1')]);setup();await renderYear(year);}catch(e){$('map-status').textContent='';$('error-text').textContent='地图数据暂时无法展开。请刷新页面重试。';$('map-error').hidden=false;$('retry').onclick=()=>location.reload();}
